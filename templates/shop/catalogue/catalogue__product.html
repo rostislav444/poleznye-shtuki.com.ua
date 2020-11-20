@@ -1,0 +1,67 @@
+{% load static %}
+{% load i18n %}
+<li>
+    <div class="product catalogue__product">
+        <a class="product_url_{{ product.id }}" href="{{ product.url }}">
+            <div 
+                id="product_image_{{ product.id }}" 
+                class="catalogue__product__image" 
+                style="background-image: url({% if product.variants|length > 0 %}{{ product.variants.0.image.s.path }}{% else %}{{ product.image }}{% endif %});"
+            >
+            <div class="catalogue__product__offers">
+                {% if product.discount > 0 %}<div class="discount h5">-{{ product.discount }}%</div>{% endif %}
+                {% if product.stars > 4.5 %}<div class="hit">{% trans 'ХИТ' %}</div>{% endif %}
+                {% if product.gift %}
+                <div class="gift__image" alt="" style="background-image: url({{ product.gift.get_image_xs }});">
+                    <img src="/static/img/ico/gift-strip.png" alt="%">
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </a>
+        <div class="info">
+            <a href="{{ product.url }}" class="title">{{ product.name }} </a>
+            <form action="{% url 'cart:add' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                {% if product.variants|length > 0 %}
+                    <ul class="variants">
+                        {% for variant in product.variants %}
+                            <label>
+                                <input 
+                                    type="radio"
+
+                                    name="variant_id" 
+                                    value="{{ product.variants.0.id }}" 
+                                    {% if forloop.counter == 1 %}
+                                        checked=true
+                                    {% endif %}
+                                >
+                                <li 
+                                    class="variant"
+                                    data-image="{{ variant.image.s.path }}" 
+                                    data-url="{{ variant.url }}"
+                                    style="{% if variant.color %}background-color: {{ variant.color_hex }}{% else %}background-image: url({{ variant.image.xs.path }}){% endif %};"
+                                >
+                                </li>
+                            </label>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                <div class="buttons">
+                    <div class="price">
+                        {% if product.old_price > product.price %}
+                            <div class="discount_wrapper">
+                                <p class="old_price">{{ product.old_price }} грн.</p>
+                                <p class="discount">-{{ product.discount }}%</p>
+                            </div>
+                        {% endif %}
+                        <p class="current_price">{{ product.price }} грн.</p>
+                    </div>
+                    <button type="submit" class="btn__add-to-cart btn bg-clr-1">Купить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</li>

@@ -1,0 +1,212 @@
+.home .home__sliders {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:auto
+}
+.home .home__sliders > div {
+  width: 10%;
+}
+.home .home__sliders .col_1{
+  flex-grow: 2;
+  height: 40vw;
+ 
+}
+.home .home__sliders .col_2 {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: -16px 0 -16px 32px;
+}
+.home .home__sliders .col_2 > div {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  flex-grow: 1;
+  margin: 16px 0 16px 0;
+}
+.home__sliders-slider-3 {
+  flex-grow: 1;
+}
+.home .home__sliders .info .title {
+  font-size: var(--h3);
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+.home .home__sliders .info {
+  width: auto;
+  max-width: 480px;
+  display: inline-block;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.6);
+  margin: 16px;
+}
+
+
+
+@media(max-width: 1240px) {
+  .home .home__sliders > div {
+    width: 100%;
+  }
+  
+  .home .home__sliders {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .home .home__sliders .col_1{
+    flex-grow: 1;
+    height: 40vw;
+    margin-bottom: 32px;
+  }
+  .home .home__sliders .col_2  {
+    width: calc(100% + 32px);
+    flex-grow: 1;
+    flex-direction: row;
+    height: 32vw;
+    margin: 0 -16px;
+  }
+  .home .home__sliders .col_2 > div {
+    display: flex;
+    flex-grow: 1;
+    width: 10%;
+    height: 100%;
+    margin: 0 16px;
+  }
+
+}
+@media(max-width: 960px) {
+  .home .home__sliders > div {
+    width: 100%;
+  }
+  
+  .home .home__sliders {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .home .home__sliders .col_1{
+    flex-grow: 1;
+    height: 50vw;
+    margin-bottom: 16px;
+  }
+  .home .home__sliders .col_2  {
+    width: calc(100% + 16px);
+    flex-grow: 1;
+    flex-direction: row;
+    height: 50vw;
+    margin: 0 -8px;
+  }
+  .home .home__sliders .col_2 > div {
+    display: flex;
+    flex-grow: 1;
+    width: 10%;
+    height: 100%;
+    margin: 0 8px;
+  }
+
+}
+@media(max-width: 640px) {
+  .home .home__sliders > div {
+    width: 100%;
+  }
+  
+  .home .home__sliders {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .home .home__sliders .col_1{
+    flex-grow: 1;
+    height: 50vw;
+    margin-bottom: 16px;
+  }
+  .home .home__sliders .col_2  {
+    width: calc(100% + 16px);
+    flex-grow: 1;
+    flex-direction: column;
+    height: auto;
+    margin: 0 -8px;
+  }
+  .home .home__sliders .col_2 > div {
+    display: flex;
+    flex-grow: 1;
+    width: calc(100% - 16px);
+    height: 100%;
+    margin: 0 8px;
+    height: 50vw;
+    margin-bottom: 16px;
+  }
+
+}
+
+.swiper-container {
+  border-radius: var(--border-radius);
+}
+.swiper-container, 
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+.home .home__best-goods {
+  margin-top: 24px;
+}
+
+.home .home__best-goods .swiper-wrapper {
+  padding: 8px;
+  margin-left: -8px;
+}
+
+.home .home__best-goods .swiper-wrapper .swiper-slide {
+  overflow: visible;
+  padding: 0 0px;
+  max-width: calc(25% - 16px);
+  margin-right: calc(16px * 3 / 4);
+  margin-left: 4px;
+
+}
+
+@media(max-width: 1380px) {
+  .home .home__best-goods .swiper-wrapper .swiper-slide {
+    max-width: calc(33% - 16px * 2 / 3);
+    margin-right: calc(16px * 2 / 3);
+    margin-left: 4px;
+  }
+}
+
+@media(max-width: 960px) {
+  .home .home__best-goods .swiper-wrapper .swiper-slide {
+    max-width: calc(50% - 16px);
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+}
+@media(max-width: 640px) {
+  .home .home__best-goods .swiper-wrapper .swiper-slide {
+    max-width: calc(50% - 8px);
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+}
+
+
+
+.home .home__best-goods .swiper-wrapper .swiper-slide .catalogue__product__title {
+  font-size: var(--h6);
+  margin: 0;
+}
+.home .home__best-goods .swiper-wrapper .swiper-slide .price {
+  font-size: var(--h5);
+}
+
+
+@media(max-width: 640px) {
+  .catalogue__product__buttons button {
+    font-size: var(--h6) !important;
+    height: 40px !important;
+}
+}

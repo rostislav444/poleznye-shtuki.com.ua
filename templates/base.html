@@ -1,0 +1,88 @@
+{% load static %}{% load i18n %}{% load compress %}{% load cache %}<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/png">
+    <title>{% trans 'Полезные Штуки: ' %}{% block title %}{% trans 'интернет-магазин функциональных товаров для дома и хобби' %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% trans 'Магазин полезных и функциональных товаров, делающих Вашу жизнь проще.' %}{% endblock %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    {% compress css %}{% endcompress %}
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base/header/header__language-switch.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base/header/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/ui/fonts.css' %}">
+        <link rel="stylesheet" href="{% static 'css/ui/colors.css' %}">
+        <link rel="stylesheet" href="{% static 'css/ui/icons.css' %}">
+        <link rel="stylesheet" href="{% static 'css/ui/ui.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main/margin.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main/padding.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main/core.css' %}">
+        <link rel="stylesheet" href="{% static 'lib/pushbar/pushbar.min.css' %}">
+        <link rel="stylesheet" href="{% static 'lib/swiper/css/swiper.min.css' %}">
+        <link rel="stylesheet" href="{% static 'lib/modaal/css/modaal.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cart/cart.css' %}">
+        <link rel="stylesheet" href="{% static 'css/shop/watchlist.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base/footer/footer.css' %}">
+        {% block links %}{% endblock %}
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '989123424861604');
+        fbq('track', 'PageView');
+        {% block pixel %}
+        {% endblock %}
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=989123424861604&ev=PageView&noscript=1"/></noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173146330-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-173146330-1');
+    </script>
+    </head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        <script>
+            var urls = {}
+        </script>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- TEMPLATES -->
+    {% block templates %}
+    {% endblock %}
+
+    {% include 'footer.html' %}
+    <!-- JS -->
+    {% compress js file base %}{% endcompress %}
+        <script src="{% static 'lib/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'lib/cookie/js.cookie.min.js' %}"></script>
+        <script src="{% static 'lib/swiper/js/swiper.min.js' %}"></script>
+        <script src="{% static 'lib/nunjuncks/nunjucks.min.js' %}"></script>
+        <script src="{% static 'lib/modaal/js/modaal.js' %}"></script>
+        <script src="{% static 'lib/imask/imask.js' %}"></script>
+        <script src="{% static 'lib/pushbar/pushbar.min.js' %}"></script>
+        <script type="text/javascript">
+            var pushbar = new Pushbar({blur: true, overlay: true,});
+        </script>
+        <script src="{% static 'js/xhr.js' %}"></script>
+        <script src="{% static 'js/shop/catalogue.js' %}"></script>
+        <!-- <script src="{% static 'js/ui/counter.js' %}"></script> -->
+        <!-- <script src="{% static 'js/cart/cart.js' %}"></script> -->
+        {% block js %}{% endblock %}
+        <script src="{% static 'lib/lozad/lozad.min.js' %}"></script>
+        <script>
+            const observer = lozad('.lazy', {});
+            observer.observe();
+        </script>
+</body>
+</html>

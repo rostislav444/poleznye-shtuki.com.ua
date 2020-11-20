@@ -1,0 +1,30 @@
+{% load static %}
+<div class="product_photos pt24">
+    <div class="swiper-container extra_galery_slider">
+      
+        <div class="swiper-wrapper">
+            
+            {% for image in product.images.all %}
+                <div class="swiper-slide galery_slide">
+                    {% if image.show %}
+                        <img src="{{ image.image_thmb.l.path }}" alt="{{ product.name }} img:{{ image.pk }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% for variant in product.variants.all %}
+                {% for image in variant.images.all %}
+                    <div class="swiper-slide galery_slide">
+                        <img src="{{ image.image_thmb.l.path }}" alt="{{ product.name }} img:{{ image.pk }}">
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            
+        </div>
+       
+        <div class="swiper-pagination"></div>
+      
+        <img src="{% static 'img/ico/arrow-prev.png' %}"  alt="<" class="ico ico_m navigation-button prev extra_galery_prev">
+        <img src="{% static '/img/ico/arrow-next.png' %}" alt=">" class="ico ico_m navigation-button next extra_galery_next">
+    </div>
+   
+</div>

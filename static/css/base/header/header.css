@@ -1,0 +1,374 @@
+header {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color:var(--clr-2);
+}
+header .first_line * {
+  color:white;
+  font-size: var(--h6);
+}
+
+
+/* FIRST LINE */
+header .first_line  {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.15);
+  /* background-color: var(--clr-3); */
+  height: 24px;
+}
+header .first_line .content  {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+header .first_line .content  .left {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+header .first_line img {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+header .first_line a {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+@media(max-width: 960px) {
+  header .first_line {
+    display: none;
+  }
+}
+
+/* END FIRST LINE */
+
+/* SECOND LINE */
+header .second_line .content {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+/* MENU */
+header .second_line .content .menu {
+  position: relative;
+  display: block;
+  width: auto;
+  height: auto;
+}
+header .second_line .content input#burger {
+  display: none;
+}
+header .second_line .content label.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 48px;
+  padding: 0 16px;
+  background-color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+
+}
+header .second_line .content label.menu .burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  margin-right: 12px;
+ 
+} 
+header .second_line .content label.menu .burger > div {
+  background-color: #333;
+  border-radius: 3px;
+  height: 4px;
+  transition: transform 0.2s ease-in-out;
+}
+header .second_line .content nav {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  background-color: white;
+  border-radius: 6px;
+  top: 76px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 320px;
+
+}
+header .second_line .content nav > a {
+  padding: 12px;
+  font-weight: 500;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 32px;
+}
+header .second_line .content nav > a img {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  padding: 4px;
+  background-color: white;
+  border-radius: 4px;
+}
+header .second_line .content nav > a:hover {
+  background-color: var(--clr-3-20);
+}
+header .second_line .content nav > a:hover p {
+  color: var(--clr-3);
+}
+
+
+header .second_line .content input#burger:checked ~ label.menu {
+  background-color: #ffa300;
+}
+header .second_line .content input#burger:checked ~ label.menu > p {
+  color: white;
+}
+header .second_line .content input#burger:checked ~ label.menu .burger > div {
+  background-color: white;
+}
+header .second_line .content input#burger:checked ~ nav {
+  display: flex;
+}
+/* END MENU */
+
+/* LOGO */
+header .second_line .content .logo {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 48px;
+}
+header .second_line .content .logo img {
+  height: 48px;
+  width: 48px;
+  margin-right: 12px;
+}
+header .second_line .content .logo p {
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+}
+/* END LOGO */
+
+/* SEARCHBAR */
+header .second_line .content form.search {
+  position: relative;
+  display: flex;
+  height: 48px;
+  width: calc(100% - 480px);
+}
+header .second_line .content form.search input[type=search] {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  padding: 0 20px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+header .second_line .content form.search button {
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding: 0 16px;
+  font-size: var(--h6);
+  background-color: var(--clr-1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+}
+header .second_line .content form.search button img {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+header .second_line .content form.search button p {
+  margin-left: 8px;
+}
+header .second_line .content form.search input[type=search]:focus {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+header .second_line .content form.search input[type=search]:focus ~ button {
+  display: flex;
+}
+header .second_line .content form.search button:hover {
+  background-color: var(--clr-4);
+}
+
+header .second_line .content input[type=search]::placeholder {
+  color: #333;
+  font-size: var(--h5);
+}
+header .second_line .content input[type=search]:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+header .second_line .content input[type=search]:focus {
+  background-color: white !important;
+}
+@media(max-width: 960px) {
+  header .second_line .content form.search button p {
+    display: none;
+  }
+}
+header .second_line a.search {
+  position: relative;
+  display: none;
+  width: 32px;
+  height: 32px;
+}
+header .second_line a.search img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* END SEARCHBAR */
+
+/* PHONE */
+header .second_line .content .phone img {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: auto;
+}
+/* END PHONE */
+
+/* CART */
+header .second_line .content .cart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+header .second_line .content .cart img {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: auto;
+  margin-right: 8px;
+}
+header .second_line .content .cart p {
+  color: white;
+  font-weight: 600;
+}
+/* END CART */
+
+@media(max-width: 1200px) {
+  header .second_line .content form.search {
+    width: calc(100% - 520px);
+  }
+}
+@media(max-width: 960px) {
+  header .second_line .content .menu > p {
+    display: none;
+  }
+  header .second_line .content label.menu .burger {
+    margin-right: 0;
+  }
+  header .second_line .content form.search {
+    width: calc(100% - 420px);
+  }
+}
+@media(max-width: 640px) {
+  header .second_line .content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px 1fr 32px auto;
+    justify-content: flex-start;
+    align-items: center;
+    height: 64px;
+    grid-gap: 12px;
+  }
+  /* MENU */
+  header .second_line .content label.menu {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-color: unset;
+    margin-right: 16px;
+  }
+  header .second_line .content label.menu .burger {
+    margin-right: 0px;
+   
+  } 
+  header .second_line .content label.menu .burger > div {
+    background-color:white;
+    border-radius: 3px;
+    height: 4px;
+  }
+  header .second_line .content input#burger:checked ~ label.menu {
+    background-color: unset;
+  }
+  header .second_line .content input#burger:checked ~ label.menu .burger > div {
+    background-color: var(--clr-1);
+  }
+  header .second_line .content nav {
+      background-color: white;
+      border-radius: 6px;
+      top: 56px;
+    
+      width: 100%;
+      min-width: 100%;
+  }
+  /* END MENU */
+  header .second_line .content .logo {
+    height: 32px;
+    width: calc(100% - 180px);
+  }
+  header .second_line .content .logo img {
+    height: 32px;
+    width: 32px;
+    margin-right: 8px;
+  }
+  header .second_line .content .logo p {
+    font-size: 14px;
+  }
+  header .second_line .content form.search {
+    display: none;
+  }
+  header .second_line a.search {
+    display: block;
+  }
+  header .second_line .content .phone {
+    display: none;
+  }
+  header .second_line a.search,
+  header .second_line .content .cart img,
+  header .second_line .content .user img,
+  header .second_line .content .phone img {
+    width: 24px;
+    height: 24px;
+  }
+}
+/* END SECOND LINE */

@@ -1,0 +1,96 @@
+{% load static %}
+{% load i18n %}
+
+<!-- DESCRIPTION -->
+<div class="product__description pb96" id="product__description">
+    <ul class="navigation_data">
+        <li id="product_description" class="active">
+            {% if product.description %}
+            <div class="description richtext">
+                {{ product.description|safe }}
+            </div>
+            {% endif %}
+            {% include 'shop/product_lp/product__video.html' %}
+            {% include 'shop/product_lp/product__attrs.html' %}
+        </li>
+        <li id="product_preferences" class="preferences">
+            {% if product.specifications.all %}
+                <div class="preferences">
+                    <p class="hd1">Характеристики</p>
+                    <div class="list ">
+                        {% for specification in product.specifications.all %}
+                        <p class="item"><span>{{ specification.name }}</span>: {{ specification.text }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </li>
+    </ul>
+    {% if product.specifications.all %}
+        <div class="product__preferences">
+            <p class="hd1">Характеристики</p>
+            <ul>
+                {% for specification in product.specifications.all %}
+                <li>
+                    <p class="key">
+                        <!-- <span class="num">{{ forloop.counter }}.</span> -->
+                        <span class="name">{{ specification.name }}</span>
+                    </p>
+                    <p class="value">{{ specification.text }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <div class="payment_and_delivery">
+        <p class="hd1">{% trans 'Как заказать?' %}</p>
+        <ul class="">
+            <li>
+                <div class="img" style="background-image: url({% static 'img/ico/pay/notepad.png' %});"></div>
+                <div class="info">
+                    <p class="title">Заявка</p>
+                    <p class="text">
+                        Воспользуйтесь формой быстрого заказа ниже или добавьте товар в корзину при момощи кнопки "Купить"
+                    </p>
+                    <a href="#fast_order_block"><button class="btn btn-prime mt16">Быстрый заказ</button></a>
+                </div>
+            </li>
+
+            <li>
+                <div class="img" style="background-image: url({% static 'img/ico/pay/customer-service-agent.png' %});"></div>
+                <div class="info">
+                    <p class="title">Подтверждение</p>
+                    <p class="text">
+                        Наши менеджеры свяжутся с Вами для подтверждения заказа и ответят на все Ваши вопросы, если таковые будут.
+                    </p>
+                </div>
+            </li>
+
+            <li>
+                <div class="img" style="background-image: url({% static 'img/ico/pay/cardboard-box.png' %});"></div>
+                <div class="info">
+                    <p class="title">Отправка</p>
+                    <p class="text">
+                        Если заказ был осуществлен до 16:00, мы отправим Вашу посылку в тот же день. И вы получите ее через 1-2 дня. 
+                    </p>
+                </div>
+            </li>
+
+            <li>
+                <div class="img" style="background-image: url({% static 'img/ico/pay/edc.png' %});"></div>
+                <div class="info">
+                    <p class="title">Получение</p>
+                    <p class="text">
+                        Оплата и проверка товара при получении на почте.
+                    </p>
+                </div>
+            </li>
+           
+        </ul>
+    </div>
+</div>
+
+
+
+

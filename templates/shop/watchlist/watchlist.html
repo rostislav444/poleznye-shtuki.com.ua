@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+
+
+
+<div class="content watchlist">
+    <!-- PRODUCTS WATCHLIST -->
+    <div class="products-div">
+        <!-- Swiper -->
+        <div class="heading pb24">
+            <p class="title semibold h3">{% trans 'Просмотренные товары' %}</p>
+            <div class="swiper-buttons slider-buttons">
+                <!-- PREV -->
+                <div class="slider-button  navigation-button watchlist_products_prev">
+                    <img src="{% static 'img/ico/arrow-prev.png' %}" alt="">
+                </div>
+                <!-- NEXT -->
+                <div class="slider-button navigation-button watchlist_products_next">
+                    <img src="{% static 'img/ico/arrow-next.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="swiper-container watchlist-container">
+            <div class="swiper-wrapper pb24" id="watchlist-products">
+                
+            </div>
+        </div>
+    </div>
+</div>
+   
+<script>
+    urls['watchlist'] = '{% url "shop:watchlist" %}'
+</script>
+
+

@@ -1,0 +1,28 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_characteristics.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="characteristics_page ">
+        <p class="title">Характеристики</p>
+       
+        <div class="data">
+            <ul>
+                {% for specification in product.specifications.all %}
+                <li>
+                    <p class="key">
+                        <span>{{ specification.name }}</span>
+                    </p>
+                    <p class="value">{{ specification.text }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+{% endblock %}
+

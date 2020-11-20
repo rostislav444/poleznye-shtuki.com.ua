@@ -1,0 +1,26 @@
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, min-width=360px, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <title>Полезные штуки: {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ui/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main/margin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main/padding.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block links %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap&subset=cyrillic" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block js %}{% endblock %}
+</body>
+</html>

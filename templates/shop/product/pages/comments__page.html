@@ -1,0 +1,116 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_comments.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="comments__page">
+        <p class="title">Отзывы</p>
+        <div class="form">
+            <ul class="comment_or_question">
+                <li>
+                    <p>Есть что рассказать о товаре?</p>
+                    <a 
+                        class="button comment_button" 
+                        href="{% url 'shop:comment_form' product.category_tree_slug product.slug product.pk %}">
+                        Отсавить отзыв
+                    </a>
+                </li>
+                <li>
+                    <p>Нужна дополнительная информация?</p>
+                    <a 
+                        class="button questions_button" 
+                        href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'questions' %}">
+                        Задать вопрос
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="list">
+            {% for comment in product.comments.all %}
+            <div class="comment__wrapper">
+                <!-- COMMENT -->
+                <div class="comment">
+                    <div class="header">
+                        <div class="customer">
+                            {% if comment.order %}
+                                <img src="{% static 'img/ico/cart-checked.png' %}" alt="Покупка подтверждена">
+                            {% endif %}
+                            <p class="customer__name">{{ comment.user.name }}</p>
+                        </div>
+                        <p class="created">{{ comment.created }}</p>
+                    </div>
+                    <div class="stars">
+                        <img src="{% if comment.rate > 0 %}{% static 'img/ico/star-10.png' %}{% else %}{% static 'img/ico/star-0.png' %}{% endif %}" alt="star-1">
+                        <img src="{% if comment.rate > 1 %}{% static 'img/ico/star-10.png' %}{% else %}{% static 'img/ico/star-0.png' %}{% endif %}" alt="star-2">
+                        <img src="{% if comment.rate > 2 %}{% static 'img/ico/star-10.png' %}{% else %}{% static 'img/ico/star-0.png' %}{% endif %}" alt="star-3">
+                        <img src="{% if comment.rate > 3 %}{% static 'img/ico/star-10.png' %}{% else %}{% static 'img/ico/star-0.png' %}{% endif %}" alt="star-4">
+                        <img src="{% if comment.rate > 4 %}{% static 'img/ico/star-10.png' %}{% else %}{% static 'img/ico/star-0.png' %}{% endif %}" alt="star-5">
+                    </div>
+                    
+                    <div class="customer__review">
+                        <p class="text">{{ comment.text }}</p>
+                        {% if comment.text_plus %}
+                            <div class="text product__plus">
+                                <p class="heading">Достоинства:</p>
+                                <p>{{ comment.text_plus }}</p>
+                            </div>
+                        {% endif %}
+                        {% if comment.text_minus %}
+                        <div class="text product__minus">
+                            <p class="heading">Недостатки:</p>
+                            <p>{{ comment.text_minus }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="footer">
+                        <div class="reply__wrapper">
+                            <a class="make_reply" href="">Ответить</a>
+                            {% if comment.replys.all|length %}
+                                <a class="show_replys" href="">Ответов ({{ comment.replys.all|length }})</a>
+                            {% endif %}
+                        </div>
+                       
+                        <div class="likes">
+                            <a href="{% url 'comments:like' product.pk comment.pk 'like' %}">
+                                <p>{{ comment.plus }}</p>
+                                <img src="{% static 'img/ico/like.png' %}" alt="+">
+                            </a>
+                            <a href="{% url 'comments:like' product.pk comment.pk 'dislike' %}">
+                                <p>{{ comment.minus }}</p>
+                                <img src="{% static 'img/ico/dislike.png' %}" alt="-">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- REPLY -->
+                <div class="replys">
+                    {% for reply in comment.replys.all %}
+                        <div class="reply">
+                            <div class="header">
+                                <div class="customer">
+                                    {% if comment.order %}
+                                        <img src="{% static 'img/ico/cart-checked.png' %}" alt="Покупка подтверждена">
+                                    {% endif %}
+                                    <p class="customer__name">{{ comment.user.name }}</p>
+                                </div>
+                                <p class="created">{{ comment.created }}</p>
+                            </div>
+                            <p class="customer__name">{{ comment.uname }}</p>
+                            <div class="customer__review">
+                                <p class="text">{{ comment.text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

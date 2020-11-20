@@ -1,0 +1,58 @@
+{% load static %}
+<div class="product__actions__wrapper" >
+    <div class="product__actions">
+        <p class="in_stock">Есть в наличии</p>
+        {% if product.variant.all|length %}
+            <ul class="product__colors">
+                {% for item in product.variant.all %}
+                    <a href="{{ item.get_absolute_url }}">
+                        <li 
+                            data-tippy-placement="top"
+                            data-tippy-content="{% if item.color %}{{ item.color.name }}{% else %}{{ item.name }}{% endif %}" tabindex="1"
+                            class="{% if item == variant %}active{% endif %}"  
+                            style="background-image: url({{ item.image_xs }});"
+                        ></li>
+                    </a>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'cart:add' %}" method="POST">
+            {% csrf_token %}
+            <div class="price">
+                {% if product.old_price > product.price %}
+                    <div class="discount_wrapper">
+                        <p class="old_price">{{ product.old_price }} грн.</p>
+                        <p class="discount">-{{ product.get_discount }}%</p>
+                    </div>
+                {% endif %}
+                <p class="current_price">{{ product.price }} грн.</p>
+            </div>
+            <input type="hidden" name="product_id" value="{{ product.pk }}">
+            {% if variant.pk %}
+                <input type="hidden" name="variant_id" value="{{ variant.pk }}">
+            {% endif %}
+            <button type="submit" class="order_button">
+                <span>Купить</span>
+            </button>
+        </form>
+    
+        <ul class="customer_info">
+           <li>
+                <p class="title">Оплата и доставка</p>
+                <ul>
+                    <li>Доставка в любой город Украины с помощью Новой Почты</li>
+                    <li>Оплата при получении товара</li>
+                </ul>
+            </li>
+            <li>
+                <p class="title">Гарантия</p>
+                <ul>
+                    <li>6 месяцев</li>
+                    <li>Обмен, возврат в течении 14 дней</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

@@ -1,0 +1,52 @@
+{% if product.lp.attrs.all|length %}
+    {% for attr in product.lp.attrs.all %}
+        <div class="{{ attr.css }} product_attr">
+            {% if attr.name %}
+            <p class="hd1">{{ attr.name }}</p>
+            {% endif %}
+            
+            {% if attr.image_l %}
+                <img class="image" src="{{ attr.image_l.url }}" alt="{{ product.translate.name }}" title="{{ product.translate.name }}">
+            {% endif %}
+            {% if attr.text %}
+                <div class="richtext">{{ attr.text|safe }}</div>
+            {% endif %}
+            {% if attr.items.all|length %}
+                <ul>
+                    {% for item in attr.items.all %}
+                    <li>
+                        <span class="num">{{ forloop.counter }}</span>
+                        {% if item.image %}
+                        <div class="image" style="background-image: url({{ item.image.url }});"></div>
+                        {% endif %}
+                        {% if item.name or item.text %}
+                            <div class="info">
+                                {% if item.name %}
+                                    <p class="title">{{ item.translate.name }}</p>
+                                {% endif %}
+                                {% if item.text %}
+                                    <p class="main-text text">{{ item.translate.text }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if attr.text_after %}
+                <div class="richtext">{{ attr.text_after|safe }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <form action="{% url 'cart:add' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.pk }}">
+        {% if variant.pk %}
+            <input type="hidden" name="variant_id" value="{{ variant.pk }}">
+        {% endif %}
+        <button type="submit" class="main_button order_button">
+            <span>Заказать сейчас</span>
+        </button>
+    </form>
+
+{% endif %}

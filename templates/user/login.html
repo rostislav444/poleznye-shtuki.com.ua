@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/user/authentication.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="breadcrumbs">
+        <a href="/"><img src="{% static 'img/ico/home.png' %}" alt=""></a>
+        <span>></span>
+        <a href="{% url 'user:login' %}">Вход</a>
+    </div>
+</div>
+<div class="authentication">
+    <!-- LOGIN -->
+    <div class="login content">
+        <p class="h3 title">Авторизация пользователя</p>
+        
+        <form class="form" id="form_auth" action="{% url 'user:login' %}{% if redirect %}?redirect={{ redirect }}{% endif %}" method="POST">
+            {% csrf_token %}
+            <div class="message {% if msg %}active{% endif %}">
+                {{ msg }}
+            </div>
+            <div class="data">
+                <label>
+                    <input 
+                        class="input" 
+                        data-type="email" 
+                        type="email" 
+                        name="email"
+                        data-alert="Введите Ваш Email" 
+                        data-error="Email имеет не верный формат"
+                        placeholder="E-mail"
+                        {% if data.email %}
+                            value="{{ data.email }}"
+                        {% endif %}
+                        required>
+                </label>
+            
+                <label>
+                    <input 
+                        name="password"
+                        data-type="password" 
+                        type="password" 
+                        placeholder="Пароль"
+                        required>
+                    <div class="show_password"></div>
+                </label>
+        
+                <button type="submit" class="col2 button h4 bold">Войти</button>
+                <p class="question mt24 center">Еще нет учетной запси?</p>
+                <a href="{% url 'user:register' %}{% if redirect %}?redirect={{ redirect }}{% endif %}" class="button h4 bold">Зарегестрируйтесь</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <!-- <script src="{% static 'lib/form_validation.js' %}"></script> -->
+{% endblock %}

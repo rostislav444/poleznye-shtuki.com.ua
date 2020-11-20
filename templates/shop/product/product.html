@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Title -->
+{% block title %}{{ product.name }}{% endblock %}
+<!-- Description -->
+{% block description %}{{ product.translation.short_description }}{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product__galery.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product__actions.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product__attr__extra_galery.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/photoswipe/photoswipe.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/photoswipe/default-skin/default-skin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/plyr/plyr.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comments/comments.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comments/comment__form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comments/product__comments.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/lp/attrs.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product-navigation.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop/product__addpage.css' %}">
+    {% block links_extended %}{% endblock %}
+{% endblock %}
+
+{% block pixel %}
+    fbq('track', 'ViewContent', { 
+        content_type: 'product',
+        content_ids: '{% if variant %}{{ product.pk }}_{{ variant.pk }}{% else %}{{ product.pk }}{% endif %}',
+        content_name: '{{ product.name|capfirst }}',
+        content_category: '{{ product.category.name }}',
+        value: {{ product.price }},
+        currency: 'UAH',
+    });
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="breadcrumbs content">
+    <a href="/"><img src="{% static 'img/ico/home.png' %}" alt=""></a>
+    <span>></span>
+    <a href="{% url 'shop:catalogue' %}">Каталог</a>
+    <span>></span>
+    {% for node in product.category.get_ancestors %}
+        {% if node.image %}
+            <img src="{{ node.image_thmb.xs.path }}" alt="">
+        {% endif %}
+        <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+        {% if forloop.counter0 < category.get_ancestors|length %}
+            <span>></span>
+        {% endif %}
+    {% endfor %}
+    {% if product.category.image %}
+        <img src="{{ product.category.image_thmb.xs.path }}" alt="">
+    {% endif %}
+    <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>
+    <span>></span>
+    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+</div>
+
+<div class="product product-page">
+    <div class="content">
+        <a href="{% url 'shop:product' product.category_tree_slug product.slug product.pk  %}">
+            <h1 class="h1 product_name">{{ product.name }}</h1>
+        </a>
+    </div>
+    <div class="product-nav__wrapper">
+        <div class="product-nav">
+            <ul class="content">
+                <a 
+                    {% url 'shop:product' product.category_tree_slug product.slug product.pk as the_url %}
+                    {% if request.path == the_url %}class="active"{% endif %}
+                    href="{% url 'shop:product' product.category_tree_slug product.slug product.pk  %}" 
+                    data-api="{% url 'shop:product' 'api' product.slug product.pk  %}"
+                ><li>Все о товаре</li></a>
+                <a 
+                    {% url 'shop:product' product.category_tree_slug product.slug product.pk 'characteristics' as the_url %}
+                    {% if request.path == the_url %}class="active"{% endif %}
+                    href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'characteristics' %}"
+                    data-api="{% url 'shop:product' 'api' product.slug product.pk 'characteristics' %}"
+                ><li>Характеристики</li></a>
+                <a 
+                    {% url 'shop:product' product.category_tree_slug product.slug product.pk 'comments' as the_url %}
+                    {% url 'shop:comment_form' product.slug product.pk as the_url_form %}
+                    {% if request.path == the_url or request.path == the_url_form %}class="active"{% endif %}
+                    href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'comments' %}"
+                    data-api="{% url 'shop:product' 'api' product.slug product.pk 'comments' %}"
+                >
+                    <li>Отзывы ({{ product.comments.all|length }})</li>
+                </a>
+                <a 
+                    {% url 'shop:product' product.category_tree_slug product.slug product.pk 'questions' as the_url %}
+                    {% if request.path == the_url %}class="active"{% endif %}
+                    href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'questions' %}"
+                    data-api="{% url 'shop:product' 'api' product.slug product.pk 'questions' %}"
+                ><li>Задать вопрос ({{ product.questions.all|length }})</li></a>
+                {% if product.videos.all|length > 0 %}
+                    <a 
+                        {% url 'shop:product' product.category_tree_slug product.slug product.pk 'review' as the_url %}
+                        {% if request.path == the_url %}class="active"{% endif %}
+                        href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'review' %}"
+                        data-api="{% url 'shop:product' 'api' product.slug product.pk 'review' %}"
+                    ><li>Видеообзор</li></a>
+                {% endif %}
+                <a 
+                    {% url 'shop:product' product.category_tree_slug product.slug product.pk 'photo' as the_url %}
+                    {% if request.path == the_url %}class="active"{% endif %}
+                    href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'photo' %}"
+                    data-api="{% url 'shop:product' 'api' product.slug product.pk 'photo' %}"
+                ><li>Фото</li></a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="product__main content" id="product__main">
+        {% block product_data %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'lib/plyr/plyr.polyfilled.js' %}"></script>
+    <script>
+        const setWatchList = "{% if variant.id %}{% url 'shop:set_watchlist' product.id variant.id %}{% else %}{% url 'shop:set_watchlist' product.id %}{% endif %}"
+        const player = new Plyr('#player');
+    </script>
+    <script src="{% static 'lib/sticky-sidebar/sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'lib/photoswipe/photoswipe.js' %}"></script>
+    <script src="{% static 'lib/photoswipe/photoswipe-ui-default.js' %}"></script>
+    <script src="{% static 'lib/imask/imask.js' %}"></script>
+    <script src="{% static 'js/shop/equipment.js' %}"></script>
+    <script src="{% static 'js/order/order_form.js' %}"></script>
+    <script src="{% static 'js/shop/product__galery.js' %}"></script>
+    <!-- <script src="{% static 'js/comments/product__comment.js' %}"></script> -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <script>
+        tippy('[data-tippy-content]');
+        const productMain = document.querySelector('.product__main')
+        const productNav = document.querySelector('.product-nav')
+
+        window.addEventListener('scroll', function () {
+            windowScrollY = window.scrollY
+            if (windowScrollY > productMain.offsetTop - productNav.offsetHeight - 16) {
+                productNav.classList.add('fixed')
+            } else  {
+                productNav.classList.remove('fixed')
+            }
+        })
+    </script>
+    <script>
+        var element = document.querySelector('input[data-type=phone]');
+        var maskOptions = {
+            lazy: false,
+            mask: '+{38} (000) 000 00 00'
+        };
+        var mask = IMask(element, maskOptions);
+    </script>
+    <script>
+        var slider = new Swiper ('.form_screen_swiper', {
+        // loop: true,
+        noSwiping: true,
+        spaceBetween: 0,
+        navigation: {
+        nextEl: '.galery_next',
+        prevEl: '.galery_prev',
+        },
+    })
+    </script>
+    <script>
+        var selectedProdcutColorImage = document.getElementById('selected_prodcut_color_image')
+        var productFormSelectColor = document.getElementById('product__form__select__color')
+        if (productFormSelectColor != undefined) {
+            var productFormSelectColorOptions = productFormSelectColor.querySelectorAll('option')
+            productFormSelectColor.onchange = () => {
+                for (let option of productFormSelectColorOptions) {
+                    if (option.selected) {
+                        selectedProdcutColorImage.src = option.dataset.image
+                        break
+                    }
+                }
+            }
+        } 
+    </script>
+
+{% endblock %}

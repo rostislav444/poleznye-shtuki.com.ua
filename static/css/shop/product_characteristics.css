@@ -1,0 +1,30 @@
+.characteristics_page .data ul {
+    display: grid;
+    grid-gap: 12px;
+}
+.characteristics_page .data ul li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+.characteristics_page .data ul li p:first-child {
+    font-weight: 600;
+}
+.characteristics_page .data ul li p {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+}
+.characteristics_page .data ul li p:first-child::after {
+    position: relative;
+    left: 0;
+    bottom: 3px;
+    display: inline-block;
+    width: calc(100% - 16px);
+    min-width: 20px;
+    border-bottom: 1px dotted #808080;
+    content: "";
+    z-index: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}

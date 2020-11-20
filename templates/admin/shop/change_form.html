@@ -1,0 +1,57 @@
+{% extends "admin/change_form.html" %}
+
+
+{% block after_related_objects %}
+<style>
+
+    @media(min-width: 1200px) {
+        .attr_groups {
+            position: relative !important;
+            width: calc(50% - 12px) !important;
+            display: iline-block !important;
+            float: left;
+            padding-bottom: 16px;
+            z-index: 1000;
+        }
+        .attr_groups .readonly {
+            margin: 0 !important;
+        }
+        .attr_groups label {
+            display: none;
+        }
+        .attr_groups:after {
+            display: table;
+            clear: bottom;
+            content: "";
+        }
+        .attr_groups:nth-child(2n - 1) {
+            margin-right: 12px;
+        }
+        .attr_groups:nth-child(2n) {
+            margin-left: 12px;
+        }
+    }
+
+</style>
+<script>
+    const copyLinkButtons = document.querySelectorAll('.copy_link_btn')
+    for (let i = 0; i < copyLinkButtons.length; i++) {
+        let btn = copyLinkButtons[i];
+        btn.addEventListener('click', function(e) {
+            e.preventDefault()
+            var copyText = document.getElementById(btn.dataset.id);
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            copyText.value
+            document.execCommand("copy");
+            
+            // alert("Copied the text: " + copyText.value);
+        })
+    }
+</script>
+{% endblock %}
+

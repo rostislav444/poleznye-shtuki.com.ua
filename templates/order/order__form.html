@@ -1,0 +1,66 @@
+{% if varint.pk and product.pk %}
+    {% url 'order:order' product.pk varint.pk  as order_url %}
+{% elif product.pk %}
+    {% url 'order:order' product.pk as order_url %}
+{% else %}
+    {% url 'order:order' as order_url %}
+{% endif %}
+
+<form class="form" action="{{ order_url }}" method="POST" id="order__form" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% if product.variant.all|length > 1 %}
+    <p>
+        <select name="variant" id="product__form__select__color">
+            {% for product_variant in product.variant.all %}
+                <option 
+                    value="{{ product_variant.pk }}" 
+                    data-image="{{ product_variant.images.all.0.image_thmb.s.path }}"
+                    {% if variant.pk == product_variant.pk %}selected{% endif %}
+                >{% if product_variant.color %}{{ product_variant.color.name }}{% else %}{{ product_variant.name }}{% endif %}
+                </option>
+            {% endfor %}
+        </select>
+    </p>
+    {% endif %}
+    <p>
+        <input type="text" 
+            placeholder="Имя *" 
+            name="name"
+            data-name="Имя"
+            data-alert="Введите Ваше имя" 
+        required>
+    </p>
+    <p>
+        <input type="text" 
+            placeholder="Фамилия *" 
+            name="surname"
+            data-name="Фамилия"
+            data-alert="Введите Вашу фамилию" 
+        required>
+    </p>
+   
+    <p>
+        <input type="text" placeholder="Номер телефона *"
+            name="phone"
+            data-type="phone" 
+            data-alert="Введите номер телефона" 
+            data-error="Номер телефона имеет не верный формат"  
+        required>
+    </p>
+    <p>
+        <input type="text" placeholder="Город *" 
+            name="city"
+            data-name="Город"
+            data-alert="Введите Ваш город назначения" 
+        required>
+    </p>
+    <p>
+        <input type="text" placeholder="Номер отделения Новой Почты *" 
+            name="branch_number"
+            data-name="Номер отделения Новой Почты"
+            data-alert="Введите Ваш город назначения" 
+        required>
+    </p>
+    <button type="submit" class="btn btn-secondary">Оформить заказ</button>
+</form>
+

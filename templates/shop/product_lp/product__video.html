@@ -1,0 +1,23 @@
+{% if product.videos.all|length %}
+    <div class="product__video">
+        <p class="hd1">Видео обзор</p>
+        <!-- VIDEO -->
+        {% for video in product.videos.all %}
+        <div class="video">
+            <video poster="{{ video.preload.url }}" id="player" playsinline controls>
+                <source src="{{ video.video.url }}" type="video/mp4" />
+            </video>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'cart:add' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.pk }}">
+        {% if variant.pk %}
+            <input type="hidden" name="variant_id" value="{{ variant.pk }}">
+        {% endif %}
+        <button type="submit" class="main_button order_button">
+            <span>Заказать сейчас</span>
+        </button>
+    </form>
+{% endif %}

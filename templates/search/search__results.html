@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Title -->
+{% block title %}Поиск {{ search_query }}{% endblock %}
+<!-- Description -->
+{% block description %}{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/search/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/catalogue.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="search_page">
+    <div class="content">
+        <h1 class="h2 semibold">Поиск по каталогу</h1>
+        <form class="search" action="{% url 'search:search' %}" method="GET">
+            
+            <input type="search" name="param" placeholder="Найти товар" value="{% if param %}{{ param }}{% endif %}">
+            <button type="submit">
+                <img src="{% static 'img/ico/search.png' %}" alt="">
+                <p>Поиск</p>
+            </button>
+        </form>
+        <ul class="catalogue__list">
+            {% for product in products %}
+                {% include 'shop/catalogue/catalogue__product.html' %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}

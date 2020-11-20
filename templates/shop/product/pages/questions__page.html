@@ -1,0 +1,85 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_comments.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="comments__page questions_page">
+        <p class="title">Вопросы о товаре: {{ product.name }}</p>
+        <div class="form">
+            <ul class="comment_or_question">
+                <li>
+                    <p>Нужна доролнительная информация?</p>
+                    <a 
+                        class="button questions_button" 
+                        href="{% url 'shop:question_form' product.category_tree_slug product.slug product.pk %}"
+                    >
+                        Задать вопрос
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="list">
+            {% for question in product.questions.all %}
+            <div class="comment__wrapper">
+                <!-- COMMENT -->
+                <div class="comment">
+                    <div class="header">
+                        <div class="customer">
+                            {% if question.order %}
+                                <img src="{% static 'img/ico/cart-checked.png' %}" alt="Покупка подтверждена">
+                            {% endif %}
+                            <p class="customer__name">{{ question.user.name }}</p>
+                        </div>
+                        <p class="created">{{ question.created }}</p>
+                    </div>
+                    
+                    <div class="customer__review">
+                        <p class="text">{{ question.text }}</p>
+                    </div>
+                    <div class="footer">
+                        <div class="reply__wrapper">
+                            <a class="make_reply" href="">Ответить</a>
+                            {% if question.replys.all|length %}
+                                <a class="show_replys" href="">Ответов ({{ question.replys.all|length }})</a>
+                            {% endif %}
+                        </div>
+                       
+                        <div class="likes">
+                            <a href="">+</a>
+                            <a href="">-</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- REPLY -->
+                {% for reply in question.replys.all %}
+                    <div class="replys">
+                        <div class="reply">
+                            <div class="header">
+                                <div class="customer">
+                                    {% if question.order %}
+                                        <img src="{% static 'img/ico/cart-checked.png' %}" alt="Покупка подтверждена">
+                                    {% endif %}
+                                    <p class="customer__name">{{ question.user.name }}</p>
+                                </div>
+                                <p class="created">{{ question.created }}</p>
+                            </div>
+                            <p class="customer__name">{{ question.user.name }}</p>
+                            <div class="customer__review">
+                                <p class="text">{{ comment.text }}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

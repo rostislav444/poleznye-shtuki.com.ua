@@ -1,0 +1,78 @@
+{% load static %}
+{% load mptt_tags %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<header>
+    <div class="first_line">
+        <div class="content">
+            <div class="left">
+                <img src="{% static 'img/ico/phone_white.png' %}" alt="Телефон">
+                <a href="tel:+30930403614">
+                    <p>+38 093 040 36 14</p>
+                </a>
+                <p class="pl16">8:00 - 20:00</p>
+            </div>
+            {% if user.is_authenticated %}
+                <a  href="{% url 'user:login' %}">
+                    <img сlass="icon" src="{% static 'img/ico/user.png' %}" alt="Профиль пользователя">
+                    {% if user.is_admin %}
+                        <p>Здравствуйте Admin 😎</p>
+                    {% else %}
+                        <p>Здравствуйте {{ user.name }}</p>
+                    {% endif %}
+                </a>
+            {% else %}
+                <a  href="{% url 'user:login' %}">
+                    <img сlass="icon" src="{% static 'img/ico/user.png' %}" alt="Профиль пользователя">
+                    <p>Вход в личны кабинет</p>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="second_line">
+        <div class="content">
+            <input type="checkbox" id="burger" name="burger" autocomplete="off">
+            <label for="burger" class="menu">
+                <div class="burger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <p>Каталог</p> 
+            </label>
+            <nav>
+                {% recursetree categories %}
+                    <a href="{% url 'shop:catalogue' node.slug %}">
+                        <img src="{{ node.image_thmb.xs.path }}" alt="{{ node.slug }}">
+                        <p>{{ node.name }}</p>
+                    </a>
+                {% endrecursetree %}
+            </nav>
+           <a href="/" class="logo">
+            <img  src="{% static 'img/logo.png' %}" alt="">
+            <p>Полезные</br>Штуки</p>
+           </a>
+            <form class="search" action="{% url 'search:search' %}" method="GET">
+                <input type="search" name="param" placeholder="Найти товар" ">
+                <button type="submit">
+                    <img src="{% static 'img/ico/search.png' %}" alt="">
+                    <p>Поиск</p>
+                </button>
+            </form>
+           <a href="{% url 'search:search' %}" class="search">
+               <img src="{% static 'img/ico/search-white.png' %}" alt="Поиск">
+           </a>
+    
+           <a href="{% url 'order:order' %}" class="cart">
+                <img src="{% static 'img/ico/cart.png' %}" alt="Корзина">
+                <p class="quantity">
+                    <span class="number">{{ cart.quantity }}</span>
+                    <span> шт.</span>
+                </p>
+            </a>
+       </div>
+    </div>
+</header>
+{% block js %}
+{% endblock %}

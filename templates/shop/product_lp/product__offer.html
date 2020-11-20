@@ -1,0 +1,77 @@
+{% load static %}
+<div class="offer_section">
+    <p class="title_block">{{ product.name }}</p>
+    {% if product.slogan %}
+    <p class="title_slogan">{{ product.slogan }}</p>
+    {% endif %}
+    <img class="offer_image" src="{{ product.image.url }}" alt="">
+    {% if product.advantages_group.css != 'image_list' %}
+        <ul class="benefits">
+            <li>
+                <div class="image">
+                    <img src="{% static 'img\ico\benefits\benefit1_icon.png' %}" alt="">
+                </div>
+                <p>100% гарантия качества</p>
+            </li>
+            <li>
+                <div class="image">
+                    <img src="{% static 'img\ico\benefits\benefit2_icon.png' %}" alt="">
+                </div>
+                <p>Быстрая доставка</p>
+            </li>
+            <li>
+                <div class="image">
+                    <img src="{% static 'img\ico\benefits\benefit3_icon.png' %}" alt="">
+                </div>
+                <p>Оплата при получении</p>
+            </li>
+        </ul>
+    {% endif %}
+
+    <div class="price">
+        <div class="old_price">
+            <p class="label">Обычная цена:</p>
+            <p class="number">{{ product.old_price }} грн</p>
+        </div>
+        <div class="currnet_price">
+            <p class="label save">Вы экономите {{ product.get_discount }}%</p>
+            <p class="number">{{ product.price }} грн</p>
+        </div>
+    </div>
+
+    {% if product.advantages_group %}
+        <div class="core_advantages">
+            <ul>
+                
+                <ul class="advantages_group {{ product.advantages_group.css }}">
+                    {% for advantage in product.advantages_group.advantages.all %}
+                        <li>
+                            <p   class="number">{{ forloop.counter }}</p>
+                            <img class="point" src="{% static 'img/ico/lp/offer__tick_icon.png' %}" alt="">
+                            <div class="image">
+                                <img src="{{ advantage.image.url }}" alt="">
+                            </div>
+                            
+                            <p class="data">{{ advantage.name }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                
+            </ul>
+        </div>
+    {% endif %}
+
+    
+
+
+    
+   
+
+    <form action="" method="POST" class="offer_section_form">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Введите Ваше Имя" required>
+        <input type="text" name="phone" placeholder="Введите Ваш номер телфона" required>
+        <button class="main_button" type="submit">Заказать сейчас</button>
+        <p class="pcs_left">Осталось <span>12</span> шт по скидке</p>
+    </form>
+</div>

@@ -1,0 +1,20 @@
+{% load static %}
+{% load i18n %}
+
+<div class="cart pushbar" data-pushbar-id="cart_sidebar" data-pushbar-direction="right">
+    <div class="title">
+        <p class="">Корзина</p>
+    </div>
+    <ul class="products" id="cart_products_list"></ul>
+    <div class="actions">
+        <div class="total">
+            <span class="h4">Всего:</span>
+            <span class="h4"><span class="cart__total h4" >0</span> грн.</span>
+        </div>
+    <button class="btn cart__btn__buy bold" onclick="location.href = '{% url 'order:order' %}'">Оформить заказ</button>
+        <button class="btn cart__btn__continue  bold" data-pushbar-close>Продолжить покупки</button>
+
+    </div>
+    <button class="close" data-pushbar-close><img src="/static/img/ico/close.png" alt=""></button>
+</div>
+{% include 'cart/tpl/cart__products.html' %}

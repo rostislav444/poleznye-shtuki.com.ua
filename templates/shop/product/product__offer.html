@@ -1,0 +1,45 @@
+{% load static %}
+<p class="hd1">Форма быстрого заказ</p>
+<div class="form_screen" style="background-image: url({% static 'img/bg.jpg' %});"> 
+    <div class="content">
+        <div class="image">
+            <div class="swiper-container form_screen_swiper">
+                <div class="swiper-wrapper">
+                    {% for image in variant.images.all %}
+                        <div class="swiper-slide" style="background-image: url({{ image.image_thmb.s.path }});"></div>
+                    {% endfor %}
+                    {% for image in product.images.all %}
+                        <div class="swiper-slide" style="background-image: url({{ image.image_thmb.s.path }});"></div>
+                    {% endfor %}
+                    <div class="swiper-slide" style="background-image: url({{ product.image_thmb.s.path }});"></div>
+                    
+                </div>
+                <img src="{% static 'img/ico/arrow-prev.png' %}" alt="<" class="ico ico_m navigation-button prev galery_prev">
+                <img src="{% static 'img/ico/arrow-next.png' %}" alt=">" class="ico ico_m navigation-button next galery_next">
+            </div>
+        </div>
+       
+        <div class="form_wrapper">
+            <div class="form_block" id="fast_order_block">
+                <div class="about_product">
+                    <img 
+                        src="{% if variant %}{{ variant.image }}{% else %}{{ product.image_thmb.s.path }}{% endif %}" 
+                        id="selected_prodcut_color_image" 
+                        class="center mt16 mb16" 
+                        width=120  alt=""
+                    >
+                    <p class="h3 bold center upper">{{ product.name }}</p>
+                    <p class="product_price center h2 mt8 mb8">
+                        
+                        <span class="current_price semibold">{{ product.price }} грн.</span>
+                        <span class="pl12 pr12 slash"> / </span>
+                        <span class="old_price semibold through">{{ product.old_price }} грн.</span>
+                    </p>
+                    
+                </div>
+                {% include 'order/order__form.html' %}
+            </div>
+        </div>
+        
+    </div>
+</div>

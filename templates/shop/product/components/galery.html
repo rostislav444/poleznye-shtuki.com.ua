@@ -1,0 +1,57 @@
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="product_image">
+  <div class="galery">
+    <div class="swiper-container slider">
+      {% if product.get_discount > 0 %}<div class="product__price__discount">-{{ product.get_discount }}%</div>{% endif %}
+      <div class="swiper-wrapper">
+          {% for image in variant.images.all %}
+            <figure class="product-slide swiper-slide slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+              <a href="{{ image.image_thmb.l.path }}" itemprop="contentUrl" data-size="{{ image.image_thmb.l.w }}x{{ image.image_thmb.l.h }}">
+                <img class="lazy" src="{{ image.image_thmb.s.path }}" data-src="{{ image.image_thmb.l.path }}"  itemprop="thumbnail" alt="Image description" />
+              </a>
+            </figure>
+          {% endfor %}
+          <figure class="product-slide swiper-slide slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+            <a href="{{ product.image_thmb.l.path }}" itemprop="contentUrl" data-size="{{ product.image_thmb.l.w }}x{{ product.image_thmb.l.h }}">
+              <img class="lazy" src="{{ product.image_thmb.s.path }}" data-src="{{ product.image_thmb.l.path }}"  itemprop="thumbnail" alt="Image description" />
+            </a>
+          </figure>
+          {% for image in product.images.all %}
+            {% if image.show %}
+              <figure class="product-slide swiper-slide slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <a href="{{ image.image_thmb.l.path }}" itemprop="contentUrl" data-size="{{ image.image_thmb.l.w }}x{{ image.image_thmb.l.h }}">
+                  <img class="lazy" src="{{ image.image_thmb.xs.path }}" data-src="{{ image.image_thmb.l.path }}" itemprop="thumbnail" alt="Image description" />
+                </a>
+              </figure>
+            {% endif %}
+          {% endfor %}
+      </div>
+      <img src="{% static 'img/ico/arrow-prev.png' %}"  alt="<" class="ico ico_m navigation-button prev galery_prev">
+      <img src="{% static '/img/ico/arrow-next.png' %}" alt=">" class="ico ico_m navigation-button next galery_next">
+    </div>
+
+    <!-- THUMBNAILS -->
+    <div class="thumbnails">
+      {% for image in variant.images.all %}
+        <div>
+          <div class="thumb" style="background-image: url({{ image.image_thmb.xs.path }});"></div>
+        </div>
+      {% endfor %}
+      <div>
+        <div class="thumb" style="background-image: url({{ product.image_thmb.xs.path }});"></div>
+      </div>
+      {% for image in product.images.all %}
+        {% if image.show %}
+        <div>
+          <div class="thumb" style="background-image: url({{ image.image_thmb.xs.path }});"></div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+   
+  </div>
+</div>
+{% endblock %}
+

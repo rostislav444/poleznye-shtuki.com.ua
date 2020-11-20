@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order/order.css' %}">
+{% endblock %}
+
+{% block pixel %}
+   fbq('track', 'AddPaymentInfo')
+{% endblock %}
+
+
+{% block content %}
+    <div class="order__page content">
+        <div class="order__products__wrapper">
+            <p class="h3 semibold pb24">Ваш список покупок</p>
+            <div class="order__products">
+                <ul class="order__products-list">
+                    {% for product in cart.products %}
+                        <li class="product">
+                            <a href="{{ product.link }}" class="image">
+                                <img src="{{ product.product.image }}" alt="product">
+                            </a>
+                            <div class="info">
+                                <p class="title h4 medium">
+                                    {{ product.product.name }}{% if product.variant %} - 
+                                        {% if product.variant.name %}
+                                            {{ product.variant.name }}
+                                        {% else %}
+                                            {{ product.variant.color.name }}
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
+                                <div class="counter" id="cart-product__counter">
+                                    <!-- MINUS -->
+                                    <form action="{% url 'cart:update' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="minus">
+                                        <input type="hidden" name="number" value="{{ forloop.counter0 }}">
+                                        <input type="hidden" name="path"   value="{{ request.path }}">
+                                        <button type="submit" class="action minus">-</button>
+                                    </form>
+                                    <!-- INPUT -->
+                                    <form action="{% url 'cart:update' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="number" value="{{ forloop.counter0 }}">
+                                        <input type="hidden" name="path"   value="{{ request.path }}">
+                                        <input 
+                                            type="number" 
+                                            id="product__quantity" 
+                                            name="quantity"
+                                            data-product_id="{{ product.product_id }}" 
+                                            data-variant_id="{{ product.variant_id }}" 
+                                            data-cart-update="true" 
+                                            value="{{ product.quantity }}" 
+                                            min=1 
+                                            max=100
+                                        >
+                                    </form>
+                                    <!-- PLUS -->
+                                    <form action="{% url 'cart:update' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="plus">
+                                        <input type="hidden" name="number" value="{{ forloop.counter0 }}">
+                                        <input type="hidden" name="path"   value="{{ request.path }}">
+                                        <button type="submit" class="action minus">+</button>
+                                    </form>
+                                </div>
+                                <!-- TOTAL -->
+                                <p class="total">
+                                    <span data-price='{{ product.price }}' class="total h5">{{ product.total }}</span>
+                                    <span class="pl4 h5">грн.</span>
+                                </p>
+                                <a href="{% url 'cart:remove' forloop.counter0 %}" class="remove" onclick="CartDelete(this)" data-product_id="{{ product.product_id }}" data-variant_id="{{ product.variant_id }}">
+                                    <img class="cart_product_remove" width=8 height=8 src="/static/img/ico/close.png" alt="x">
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <p class="order__total-block semibold h4">Всего к оплате: <span id='order_total' class="h3 clr3">{{ cart.total }}</span> <span class="currency h3 clr3"> грн.</span></p>
+                </ul>
+            </div>
+        </div>
+       
+        <div class="order__form__wrapper ">
+            <p class="h3 semibold pb24">Оформление заказа</p>
+            <div class="order__form">
+                <p class="h5 clr3 semibold pt8 pb24">Введите вашу контактную информацию в форме ниже</p>
+                {% include 'order/order__form.html' %}
+            </div>
+        </div>
+        
+
+    </div>
+
+    {% include 'order/tpl/order__products.html' %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'lib/imask/imask.js' %}"></script>
+<script>
+    var element = document.querySelector('input[data-type=phone]');
+    var maskOptions = {
+        lazy: false,
+        mask: '+{38} (000) 000 00 00'
+    };
+    var mask = IMask(element, maskOptions);
+</script>
+<script src="{% static 'js/order/order_form.js' %}"></script>
+
+{% endblock %}

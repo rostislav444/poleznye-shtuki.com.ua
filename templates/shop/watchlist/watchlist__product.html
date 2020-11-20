@@ -1,0 +1,21 @@
+{% verbatim %}
+<template id="tpl_watchlist_product">
+    {% for product in watchlist.products %}
+        <div class="swiper-slide watchlist-product">
+            <a href="{{ product.link }}">
+                <div class="image" href="{{ product.link }}" style="background-image: url({{ product.image }});"></div>
+            </a>
+            <div class="description mt16">
+                <a href="{{ product.link }}" class="title semibold upper pb16 h5 catalogue__product__title">{{ product.name }}{% if product.color %} - {{ product.color }}{% endif %}</a>
+                <p class="price pt8">
+                    <span >{{ product.price }} грн.</span>
+                    {% if product.old_price != 0 %}
+                        <span class="ml8 through clr2">{{ product.old_price }} грн.</span>
+                    {% endif %}
+                </p>
+                
+            </div>
+        </div>
+    {% endfor %}
+</template>
+{% endverbatim %}

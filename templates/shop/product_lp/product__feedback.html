@@ -1,0 +1,37 @@
+{% load static %}
+{% if product.feedbacks.all|length %}
+    <div class="feedbacks">
+        <p class="hd1">Отзывы наших клиентов</p>
+        <div class="swiper-container feedbacks_swiper">
+            <div class="swiper-wrapper">
+                {% for feedback in product.feedbacks.all %}
+                    <div class="swiper-slide ">
+                        <div class="item">
+                            <div class="user">
+                                {% if feedback.image %}
+                                    <img src="{{ feedback.image.url }}" alt="">
+                                {% else %}
+                                    {% if feedback.gender == "W" %}
+                                        <img src="{% static 'img/Female.png' %}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'img/Male.png' %}" alt="">
+                                    {% endif %}
+                                {% endif %}
+                                <p class="name">{{ feedback.name }}</p>
+                            </div>
+                            <p class="text">{{ feedback.text }}</p>
+                            <div class="images">
+                                {% for image in feedback.images.all %}
+                                    <img src="{{ image.image_thmb.s.path }}" alt="">
+                                {% endfor %}
+                            </div>
+                        </div>
+                
+                    </div>
+                {% endfor %}
+            </div>
+            <img src="{% static 'img/ico/arrow-prev.png' %}"  alt="<" class="ico ico_m navigation-button prev feedbacks_prev">
+            <img src="{% static '/img/ico/arrow-next.png' %}" alt=">" class="ico ico_m navigation-button next feedbacks_next">
+        </div>
+    </div>
+{% endif %}

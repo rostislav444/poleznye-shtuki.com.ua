@@ -1,0 +1,9 @@
+<div class="product__video">
+    {% for video in product.videos.all %}
+    <div class="video">
+        <video poster="{{ video.preload.url }}" id="player" playsinline controls>
+            <source src="{{ video.video.url }}" type="video/mp4" />
+        </video>
+    </div>
+    {% endfor %}
+</div>

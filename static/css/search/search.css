@@ -1,0 +1,44 @@
+.search_page .content > form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    grid-template-rows: 48px;
+    grid-gap: 8px;
+    margin-top: 32px;
+}
+.search_page .content > form input,
+.search_page .content > form button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+}
+.search_page .content > form input {
+    width: calc(100%);
+    background-color: #f2f2f2;
+    padding: 0 12px;
+}
+.search_page .content > form button {
+    background-color: var(--clr-1);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.search_page .content > form button:hover {
+    background-color: var(--clr-4);
+}
+.search_page .content > form button p {
+    margin-left: 8px;
+}
+
+.catalogue__list {
+    margin-top: 48px;
+}
+@media(max-width: 960px) {
+    .search_page .content > form {
+        grid-template-columns: 1fr 48px;
+    }
+    .search_page .content > form button p {
+        display: none;
+    }
+}

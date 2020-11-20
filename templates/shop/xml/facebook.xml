@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+	<channel>
+		<title>Полезные Штуки</title>
+		<link>https://poleznye-shtuki.com.ua/ru/</link>
+		<description>This is a sample feed containing products of Poleznye-Shtuki stroe catalogue</description>
+        {% with base_url="https://poleznye-shtuki.com.ua" %}   
+        
+            {% for product in products %}
+               {% if product.variant.all|length %}
+                    {% for variant in product.variant.all %}
+                        <item>
+                            <item_group_id>group_{{ product.pk }}</item_group_id>
+                            <g:id>{{ product.pk }}_{{ variant.pk }}</g:id>
+                            <g:gtin>plzsht-{{ product.pk }}_{{ variant.pk }}</g:gtin>
+                            <id>{{ product.pk }}_{{ variant.pk }}</id>
+                            <code>product_{{ product.pk }}_{{ variant.pk }}</code>
+                            <brand>poleznye-shtuki</brand>
+                            <title>{{ product.name }}</title>
+                            <g:description>{{ product.short_description }}</g:description>
+                            <description>{{ product.short_description }}</description>
+                            <link>{{ base_url }}{{ product.get_absolute_url }}</link>
+
+                            {% for image in variant.images.all %}
+                                {% if forloop.counter == 1 %}
+                                    <g:image_link>{{ base_url }}{{ image.image_l.url }}</g:image_link>
+                                {% else %}
+                                    <g:additional_image_link>{{ base_url }}{% if image.image_sq %}{{ image.image_sq.url }}{% else %}{{ image.image_l.url }}{% endif %}</g:additional_image_link>
+                                {% endif %}
+                            {% endfor %}
+                           
+                            <g:availability>in stock</g:availability>
+                            <availability>in stock</availability>
+                            <!-- PRICE -->
+                            <g:price>{{ product.price }} UAH</g:price>
+                            <identifier_exists>no</identifier_exists>
+                            <category>{{ product.category.name }}</category>
+                            <g:condition>new</g:condition>
+                            <g:color>{{ variant.color.name }}</g:color>
+                            <color>{{ variant.color.name }}</color>
+                            <!-- SHIPING -->
+                            <g:shipping>
+                                <g:country>UA</g:country>
+                                <g:service>Standard</g:service>
+                                <g:price>50 UAH</g:price>
+                            </g:shipping>
+                            <availability>In stoack</availability>
+                        </item>
+                    {% endfor %}
+               {% else %}
+                    <item>
+                        <g:id>{{ product.pk }}</g:id>
+                        <id>{{ product.pk }}</id>
+                        <g:gtin>plzsht-{{ product.pk }}</g:gtin>
+                        <brand>poleznye-shtuki</brand>
+                        <code>product_{{ product.pk }}</code>
+                        <title>{{ product.name }}</title>
+                        <g:description>{{ product.short_description }}</g:description>
+                        <description>{{ product.short_description }}</description>
+                        <link>{{ base_url }}{{ product.get_absolute_url }}</link>
+                      
+                        {% for image in product.images.all %}
+                            {% if forloop.counter == 1 %}
+                                <g:image_link>{{ base_url }}{% if image.image_sq %}{{ image.image_sq.url }}{% else %}{{ image.image_l.url }}{% endif %}</g:image_link>
+                            {% else %}
+                                <g:additional_image_link>{{ base_url }}{% if image.image_sq %}{{ image.image_sq.url }}{% else %}{{ image.image_l.url }}{% endif %}</g:additional_image_link>
+                            {% endif %}
+                        {% endfor %}
+                        <g:availability>in stock</g:availability>
+                        <availability>in stock</availability>
+                        <!-- PRICE -->
+                        <g:price>{{ product.price }} UAH</g:price>
+                        <identifier_exists>no</identifier_exists>
+                        <category>{{ product.category.name }}</category>
+                        <g:condition>new</g:condition>
+                        <!-- SHIPING -->
+                        <g:shipping>
+                            <g:country>UA</g:country>
+                            <g:service>Standard</g:service>
+                            <g:price>50 UAH</g:price>
+                        </g:shipping>
+                        <availability>In stoack</availability>
+                    </item>
+                {% endif %}
+                
+            {% endfor %}
+        {% endwith %}
+	</channel>
+</rss>

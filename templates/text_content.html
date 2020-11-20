@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+   
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="h1 pb48 pt48" >{{ page.translate.name }}</h1>
+    <div class="richetext pb96" style="max-width: 960px;">
+        {{ page.translate.text|safe }}
+    </div>
+</div>
+
+{% endblock %}

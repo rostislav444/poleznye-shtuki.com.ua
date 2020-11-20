@@ -1,0 +1,97 @@
+:root {
+    --h0: 48px;
+    --h1: 36px;
+    --h2: 30px;
+    --h3: 24px;
+    --h4: 20px;
+    --h5: 16px;
+    --h6: 14px;
+}
+
+
+body, ::placeholder, textarea {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+
+body, input, textarea, select, div, li, span, button, ::placeholder {
+    font-size: var(--h5);
+}
+
+a, p, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    /* color: #251605; */
+    color: rgb(32, 32, 32);
+    text-decoration: none;
+    line-height: 1.1;
+}
+
+
+
+/* WEIGHT */
+.extralight  { font-weight: 200; }
+.light 	     { font-weight: 300; }
+.regular 	 { font-weight: 400; }
+.medium  	 { font-weight: 500; }
+.semibold    { font-weight: 600; }
+.bold		 { font-weight: 700; }
+.extra-bold  { font-weight: 800; }
+/* Transform */
+.upper      { text-transform: uppercase;}
+.capitalize { text-transform: capitalize;}
+.through    { text-decoration: line-through;}
+.center     { text-align: center; }
+.underline  { text-decoration: underline;}
+/* Sizes */
+h1, .h1 { font-size: var(--h1) !important; margin: 0;}
+h2, .h2 { font-size: var(--h2) !important; margin: 0; font-weight: 600;}
+h3, .h3 { font-size: var(--h3) !important; margin: 0;}
+h4, .h4 { font-size: var(--h4) !important; margin: 0;}
+h5, .h5 { font-size: var(--h5) !important; margin: 0;}
+h6, .h6 { font-size: var(--h6) !important; margin: 0;}
+
+.link {
+    font-weight: 500;
+    color:var(--clr-3);
+    cursor: pointer;
+}
+.text-max {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+/* Titles */
+.hd1 {
+    font-size: var(--h3);
+    line-height: 1.25;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 40px;
+    /* color: #f94d37; */
+}   
+
+
+.tltl2 {
+    font-size: var(--h5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2;
+    text-align: center;
+}
+.tltl3 {
+    font-size: var(--h4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2;
+    text-align: center;
+}
+
+.main-text {
+    line-height: 1.5;
+    letter-spacing: 2;
+    font-size: var(--h5);
+    font-weight: 400;
+    /* padding-bottom: 16px; */
+}

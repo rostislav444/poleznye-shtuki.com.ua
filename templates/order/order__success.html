@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pixel %}
+   fbq('track', 'Purchase')
+{% endblock %}
+
+
+{% block content %}
+<div style="min-height: 40vh;" class="content">
+    <h1 class="h1 mt32 mb16">Ваш заказ принят в обработку</h1>
+    <p>Очень скоро мы с Вами свяжемся</p>
+</div>
+{% endblock %}

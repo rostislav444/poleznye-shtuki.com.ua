@@ -1,0 +1,9 @@
+.photo__page .images {
+    display: flex;
+    flex-direction: column;
+}
+.photo__page .images img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+}

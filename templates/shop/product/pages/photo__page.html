@@ -1,0 +1,22 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_photo.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="photo__page">
+        <p class="title">Фото</p>
+        <div class="images">
+            <img src="{{ product.image_thmb.l.path }}" alt="">
+            {% for image in product.images.all %}
+                <img src="{{ image.image_thmb.l.path }}" alt="">
+            {% endfor %}
+        </div>
+           
+           
+    </div>
+{% endblock %}
+

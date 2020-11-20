@@ -1,0 +1,130 @@
+.product__comments {
+    position: relative;
+    display: block;
+    width: 100%;
+    clear: both;
+    margin-top: 24px;
+}
+.product__comments .title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.comments .wrapper .comment {
+    /* background-color: white; */
+    padding: 24px;
+    width: calc(100% - 48px);
+    height: auto;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+    /* background-color: #ebebf1; */
+    background-color: #ffefaa;
+}
+.comments .wrapper .comment:hover,
+.comments .wrapper .chat .message:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.20);
+}
+
+.comments .wrapper .chat {
+    margin-left: 24px;
+}
+.comments .wrapper .chat .message {
+    margin-top: 16px;
+    padding: 24px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+}
+.comments .wrapper .chat .message:nth-child(2n-1) {
+    background-color: rgb(228, 228, 238);
+
+}
+
+.comments .wrapper .chat .message.admin .title {
+    display: grid;
+}
+
+.no_comments {
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+@media(max-width: 1360px) {
+    .comments {
+        width: calc(100% - 16px);
+    }
+}
+@media(max-width: 960px) {
+    .comments {
+        width: 100%;
+        margin-left: 0;
+    }
+    .comments .wrapper  {
+        margin-left: 0;
+    }
+}
+
+.comments .comment .main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* COMMENTS FORM */
+.swiper-button-disabled {
+    pointer-events: none;
+}
+
+
+
+
+input[readonly]{
+    background-color: var(--color-1-50) !important;
+    border-color:  var(--color-1-50) !important;
+}
+
+.comment_image {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    position: relative;
+
+
+
+}
+.comments__wrapper {
+    position: relative;
+    display: block;
+}
+.comments__wrapper .preloader {
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+    justify-content: center;
+    align-items: flex-start;
+    visibility: hidden;
+}
+.comments__wrapper .preloader img {
+    width: 80px;
+    max-width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+
+
+
+

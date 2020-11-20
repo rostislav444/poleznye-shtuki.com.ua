@@ -1,0 +1,43 @@
+{% extends '../product.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block product_data %}
+    <div class="main_block_wrapper">
+        {% include 'shop/product/components/galery.html' %}
+        {% include 'shop/product/product__actions.html' %}
+        {% include 'shop/product/pages/description.html' %}
+        
+    </div>
+    
+    
+    {% include 'shop/product/product__offer.html' %}
+    {% include 'shop/product/photoswipe__root.html' %}
+
+    <script src="{% static 'lib/sticky-sidebar/sticky-sidebar.min.js' %}"></script>
+    <script type="text/javascript">
+        var screenSizeMatch = window.matchMedia('(max-width: 960px)');
+        var sidebar = undefined
+        function screenTest() {
+            if (screenSizeMatch.matches) {
+                if (sidebar) {
+                    sidebar.destroy();
+                }
+            } else {
+                sidebar = new StickySidebar('.product__actions__wrapper', {
+                    containerSelector: '.main_block_wrapper',
+                    innerWrapperSelector: '.product__actions',
+                    topSpacing: 96,
+                    bottomSpacing: 80
+                });
+            }
+        }
+        screenTest()
+
+        screenSizeMatch.addListener(screenTest);
+    </script>
+{% endblock %}
+
+
+
+

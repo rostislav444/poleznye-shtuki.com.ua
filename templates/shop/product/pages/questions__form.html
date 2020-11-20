@@ -1,0 +1,26 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_comments.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="comments__page question__page">
+        <a class="link" href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'questions' %}">< Вопросы</a>
+        <p class="title">Попрос по товару: {{ product.name }}</p>
+        <div class="form">
+            <form 
+                method="POST"
+                action="{% url 'shop:question_form' product.category_tree_slug product.slug product.pk %}"   
+                data-api="{% url 'shop:product' 'api' product.slug product.pk 'questions' %}"
+            >
+                {% csrf_token %}
+                <p><textarea name="text" id="" cols="30" rows="10" placeholder="Напишите вопрос здесь"></textarea></p>
+                
+                <button>Задать вопрос</button>
+            </form>
+        </div>
+    </div>    
+{% endblock %}

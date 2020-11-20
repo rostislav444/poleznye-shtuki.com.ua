@@ -1,0 +1,108 @@
+{% load static %}
+{% load i18n %}
+
+<!-- DESCRIPTION -->
+<div class="product__description" id="product__description">
+    <ul class="navigation_data">
+        <li id="product_description" class="">
+            {% if product.description %}
+            <p class="hd1">Описание</p>
+            <div class="description ">
+                <div class="richtext">
+                    {{ product.description|safe }}
+                </div>
+            </div>
+            {% endif %}
+            {% include 'shop/product_lp/product__video.html' %}
+            <div class="lp">
+                {% include 'shop/product_lp/product__attrs.html' %}
+            </div>
+            
+            <p class="show">Показать полностью</p>
+        </li>
+        <li id="product_preferences" class="preferences">
+            {% if product.specifications.all %}
+                <div class="product__preferences">
+                    <p class="hd1">Характеристики</p>
+                    <ul>
+                        {% for specification in product.specifications.all %}
+                        <li>
+                            <p class="key">
+                                <!-- <span class="num">{{ forloop.counter }}.</span> -->
+                                <span class="name">{{ specification.name }}</span>
+                            </p>
+                            <p class="value">{{ specification.text }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </li>
+    </ul>
+    
+    {% if product.equipment.image_l and product.equipment.items.all|length %}
+        <div class="equipment">
+            <p class="hd1">{% if product.equipment.name %}{{ product.equipment.name }}{% else %}Комплектация{% endif %}</p>
+            {% if product.equipment.text %}
+                <p class="pb48">{{ product.equipment.text }}</p>
+            {% endif %}
+            <div class=" equipment__wrapper">
+                <ul class="equipment__list">
+                    {% for item in product.equipment.items.all %}
+                    <li>
+                        <label for="equipment_{{ forloop.counter }}">
+                            <input data-id="eq{{ item.x }}_{{ item.y }}" data-text="{{ item.name }}" type="radio" id="equipment_{{ forloop.counter }}" name="equipment">
+                            <div class="option">{{ forloop.counter }}. {{ item.name }}</div>
+                        </label>
+                    </li>
+                    {% endfor %}  
+                </ul>
+                <div id="equipment_image" class="image" style="background-image: url({{ product.equipment.image_l.url }});">
+                    <div id="equipment_image_blocks"></div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="how_to_order">
+        <p class="hd1">{% trans 'Как заказать?' %}</p>
+        <ul class="">
+            <li>
+                <img src="{% static 'img/ico/order/newspaper.svg' %}" alt="Заявка" class="image">
+                <div class="info">
+                    <p class="title">Заявка</p>
+                    <p class="text">
+                        Воспользуйтесь формой быстрого заказа ниже или кнопкой "Купить"
+                    </p>
+                </div>
+            </li>
+            <li>
+                <img src="{% static 'img/ico/order/headphones.svg' %}" alt="Подтверждение" class="image">
+                <div class="info">
+                    <p class="title">Подтверждение</p>
+                    <p class="text">
+                        Наши менеджеры свяжутся с Вами для подтверждения заказа.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <img src="{% static 'img/ico/order/package.svg' %}" alt="Отправка" class="image">
+                <div class="info">
+                    <p class="title">Отправка</p>
+                    <p class="text">
+                        Дотсавим Ваш заказ в течении 1-3 дней. 
+                    </p>
+                </div>
+            </li>
+
+            <li>
+                <img src="{% static 'img/ico/order/money-bag.svg' %}" alt="Получение" class="image">
+                <div class="info">
+                    <p class="title">Получение</p>
+                    <p class="text">
+                        Оплата и проверка товара при получении на Новой почте.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

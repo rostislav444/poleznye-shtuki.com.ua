@@ -1,0 +1,133 @@
+
+
+.cart ul.products {
+    position: relative;
+    display: block;
+    width: calc(100% - 32px);
+    height: calc(100% - 232px - 40px);
+    padding: 16px;
+    overflow-y: scroll;
+
+}
+.cart ul.products li.product {
+    position: relative;
+    display: block;
+    margin-bottom: 16px;
+}
+.cart ul.products li.product::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* IMAGE */
+.cart ul.products li.product .image {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    float: left;
+    position: relative;
+    border: 3px solid var(--grey-3);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-right: 16px;
+    
+}
+.cart ul.products li.product .image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* INFO */
+.cart ul.products li.product .info {
+    position: relative;
+    display: inline-block;
+    width: calc(100% - 80px - 24px);
+    z-index: 1;
+    float: left;
+}
+
+/* SIZE */
+.cart ul.products li.product .size {
+    width: 100%;
+    display: block;
+}
+.cart ul.products li.product .size p {
+    display: inline-block;
+   
+   
+}
+.cart ul.products li.product .size select {
+    border: 1px solid grey;
+    border-radius: 3px;
+    display: inline-block;
+    
+}
+
+/* PRICE */
+.cart ul.products li.product .price {
+    display: inline-block;
+    margin-top: 12px;
+    float: left;
+}
+
+
+
+ .cart ul.products li.product .remove:hover {
+    background-color: var(--clr-2);
+     opacity: 1;
+     
+ }
+
+
+.product_quantity input {
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+    border: none;
+    color: #333;
+}
+.cart .actions {
+    padding: 16px;
+    height: 112px;
+}
+
+.cart .actions .total {
+    display: flex;
+    justify-content: space-between;
+}
+.cart .actions button {
+    margin-top: 8px;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+
+}
+
+.cart__btn__buy {
+    border: none;
+    background-color: var(--clr-2);
+    color: white;
+}
+
+.cart__btn__continue {
+    bborder: none;
+    background-color: var(--clr-1);
+    color: white;
+}
+
+
+.cart .counter {
+    width: 80px;
+    height: auto;
+    margin-top: 8px;
+    margin-right: 16px;
+    float: left;
+}
+.cart .counter span  {
+    height: auto;
+    padding: 4px 0;
+}

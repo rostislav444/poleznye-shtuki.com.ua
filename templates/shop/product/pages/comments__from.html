@@ -1,0 +1,36 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'css/shop/product_comments.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="comments__page">
+        <a class="link" href="{% url 'shop:product' product.category_tree_slug product.slug product.pk 'comments' %}">< Отзывы</a>
+        <p class="title">Отсьавить отзыв</p>
+        <div class="form">
+            <form 
+                method="POST"
+                action="{% url 'shop:comment_form' product.category_tree_slug product.slug product.pk %}"  
+            >
+                {% csrf_token %}
+                <p>
+                    <select name="rate" id="">
+                        <option value="5">Отлично</option>
+                        <option value="4">Хорошо</option>
+                        <option value="3">Нормально</option>
+                        <option value="2">Плохо</option>
+                        <option value="1">Ужасно</option>
+                    </select>
+                </p>
+                <p><input name="text_plus" type="text" placeholder="Достоинства"></p>
+                <p><input name="text_minus" type="text" placeholder="Недостатки"></p>
+                <p><textarea name="text" id="" cols="30" rows="10" placeholder="Ваш отзыв о товаре"></textarea></p>
+                
+                <button>Отправить отзыв</button>
+            </form>
+        </div>
+    </div>    
+{% endblock %}

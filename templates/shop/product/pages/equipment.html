@@ -1,0 +1,25 @@
+
+<!-- EQUIPMENT -->
+{% if product.equipment.image_l and product.equipment.items.all|length %}
+    <div class="equipment">
+        <p class="hd1">{% if product.equipment.name %}{{ product.equipment.name }}{% else %}Комплектация{% endif %}</p>
+        {% if product.equipment.text %}
+            <p class="pb48">{{ product.equipment.text }}</p>
+        {% endif %}
+        <div class=" equipment__wrapper">
+            <ul class="equipment__list">
+                {% for item in product.equipment.items.all %}
+                <li>
+                    <label for="equipment_{{ forloop.counter }}">
+                        <input data-id="eq{{ item.x }}_{{ item.y }}" data-text="{{ item.name }}" type="radio" id="equipment_{{ forloop.counter }}" name="equipment">
+                        <div class="option">{{ forloop.counter }}. {{ item.name }}</div>
+                    </label>
+                </li>
+                {% endfor %}  
+            </ul>
+            <div id="equipment_image" class="image" style="background-image: url({{ product.equipment.image_l.url }});">
+                <div id="equipment_image_blocks"></div>
+            </div>
+        </div>
+    </div>
+{% endif %}

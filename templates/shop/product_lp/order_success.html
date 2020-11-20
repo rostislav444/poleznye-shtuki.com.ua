@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=480, user-scalable = no"> 
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>{{ product.name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/margin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/padding.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/lp/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/lp/attrs.css' %}">
+</head>
+<body>
+
+    <main >
+        <div class="succeess offer_section">
+            <p class="title_block">{{ product.name }}</p>
+            {% if product.slogan %}
+            <p class="h2 title_slogan">Ваш заказ принят в обработку. Очень скоро мы Вам позвоним.</p>
+            {% endif %}
+            <img class="offer_image" src="{{ product.image.url }}" alt="">
+            {% if product.advantages_group.css != 'image_list' %}
+                <ul class="benefits">
+                    <li>
+                        <div class="image">
+                            <img src="{% static 'img\ico\benefits\benefit1_icon.png' %}" alt="">
+                        </div>
+                        <p>100% гарантия качества</p>
+                    </li>
+                    <li>
+                        <div class="image">
+                            <img src="{% static 'img\ico\benefits\benefit2_icon.png' %}" alt="">
+                        </div>
+                        <p>Быстрая доставка</p>
+                    </li>
+                    <li>
+                        <div class="image">
+                            <img src="{% static 'img\ico\benefits\benefit3_icon.png' %}" alt="">
+                        </div>
+                        <p>Оплата при получении</p>
+                    </li>
+                </ul>
+            {% endif %}
+
+
+        </div>
+    </main>
+</body>
+</html>

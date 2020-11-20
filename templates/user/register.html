@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/user/authentication.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="breadcrumbs">
+        <a href="/"><img src="{% static 'img/ico/home.png' %}" alt=""></a>
+        <span>></span>
+        <a href="{% url 'user:register' %}">Регистрация</a>
+    </div>
+</div>
+
+<div class="authentication">
+    <!--REGISTER -->
+    <div class="content">
+        <div class="register content_right">
+            <p class="h3 title">Регистрация нового пользователя</p>
+            <form class="form" id="form_register" action="{% url 'user:register' %}{% if redirect %}?redirect={{ redirect }}{% endif %}"  method="POST">
+                {% csrf_token %}
+                <div class="message {% if msg %}active{% endif %}">
+                    {{ msg }}
+                </div>
+                <div class="data">
+                    <label>
+                        <input data-type="email" class="input" type="email" name="email" placeholder="E-mail" data-error="Введите Ващ E-mail" required>
+                    </label>
+                    <label>
+                        <input data-type="text_only" type="text" name="name"  placeholder="Имя" required>
+                    </label>
+                    <label>
+                        <input data-type="text_only" type="text" name="surname"  placeholder="Фамилия" required>
+                    </label>
+                    <label>
+                        <input data-type="password" type="password" name="password"  placeholder="Пароль" id="register_password_input" required>
+                        <div class="show_password"></div>
+                    </label>
+                    <label>
+                        <input data-type="password2" type="password" name="password2"  placeholder="Подтверждение пароля" data-parent="parent" required>
+                        <div class="show_password"></div>
+                    </label>
+                    <a href="{% url 'user:login' %}{% if redirect %}?redirect={{ redirect }}{% endif %}" class="question center">Уже зарегестрированы?</a>
+                    <button type="submit" class="col2 button h4 bold">Создать аккаунт</button>
+                    <p class="center col2">
+                        <span>Нажимая на кнопку Создать аккаунт, Вы соглашаетесь с </span>
+                        <a class="bold" href="">условиями и положениями</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'lib/form_validation.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="header__cart">
+    <img class="header__cart-icon ico-24 pointer" src="{% static 'img/ico/cart.png' %}" alt="cart" onclick="pushbar.open('cart_sidebar')">
+    <p class="cart__data h5 semibold pointer" onclick="pushbar.open('cart_sidebar')">
+        <span class="cart__quantity">0</span>
+        <span class="cart__total mr12">0</span>
+        <span class="cart__currency">грн.</span>
+    </p>
+    
+</div>
+
+<script>
+    const cartUrls = {
+        
+        "data" :   "{% url 'order:cart-data' %}",
+        "update" : "{% url 'order:cart-add-update' %}",
+        "delete" : "{% url 'order:cart-delete' %}",
+        "clear" :  "{% url 'order:cart-clear' %}",
+    }
+</script>

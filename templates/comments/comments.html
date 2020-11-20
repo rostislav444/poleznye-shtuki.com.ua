@@ -1,0 +1,22 @@
+{% load static %}
+<div class="comments" id="product_commnets">
+    <div class="content">
+        <div class="hd1 title">Отзывы наших покупателей</div>
+        <div class="comments__list">
+            {% include './comments__list.html' %}
+        </div>
+        
+        <button 
+            data-modaal-content-source="#comment_form" 
+            data-modaal-type="inline" 
+            data-modaal-animation="fade" 
+            class="btn btn-prime modaal">
+                Оставить комментарий
+        </button>
+    </div>
+</div>
+{% include './comment__form.html' %}
+
+{% block js %}
+    
+{% endblock %}

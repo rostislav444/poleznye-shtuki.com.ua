@@ -1,0 +1,35 @@
+.watchlist {
+    margin-top: 64px;
+}
+.watchlist-product .image {
+    position: relative;
+    display: block;
+    padding-top: 100%;
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    background-position: center;
+    background-size: cover;
+}
+.heading,
+.heading .swiper-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading .navigation-button {
+    position: relative;
+    opacity: 1;
+    max-width: 12px !important;
+    max-height: 12px  !important;
+    border-radius: 50%;
+    padding: 12px !important;
+    top: calc(50% - 22px);
+    opacity: 1;
+    border: none;
+    box-shadow: var(--box-shadow);
+}
+.heading .navigation-button:nth-child(2) {
+    margin-left: 8px !important;
+}

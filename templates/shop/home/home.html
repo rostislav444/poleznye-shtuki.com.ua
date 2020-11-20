@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+<!-- Description -->
+<!-- Links -->
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/shop/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/catalogue.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="home">
+    <div class="content">
+        <!-- Sliders -->
+        {% if home_slider_1|length > 0 %}
+        <div class="home__sliders">
+           
+            <div class="slider home__sliders-slider-1 col_1" >
+                <div class="swiper-container home_slider home_slider_1">
+                    <div class="swiper-wrapper">
+                        {% for slide in home_slider_1 %}
+                            {% include 'shop/home/slider/slide.html' %}
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="button-prev navigation-button"></div>
+                    <div class="button-next navigation-button"></div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+            
+            {% if home_slider_2|length > 0 or home_slider_3|length > 0%}
+                <div class="col_2">
+                    {% if home_slider_2|length > 0 %}
+                    <div class="slider home__sliders-slider-2">
+                        <div class="swiper-container home_slider home_slider_2">
+                            <div class="swiper-wrapper">
+                                {% for slide in home_slider_2 %}
+                                    {% include 'shop/home/slider/slide.html' %}
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="button-prev navigation-button"></div>
+                            <div class="button-next navigation-button"></div>
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if home_slider_3|length > 0 %}
+                    <div class="slider home__sliders-slider-3">
+                        <div class="swiper-container home_slider home_slider_3">
+                            <div class="swiper-wrapper">
+                                {% for slide in home_slider_3 %}
+                                    {% include 'shop/home/slider/slide.html' %}
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="button-prev navigation-button"></div>
+                            <div class="button-next navigation-button"></div>
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+        {% endif %}
+        <!-- Best goods -->
+        <div class="home__best-goods">
+            <div class="title">
+                <h2 class="block__title h2 mb32">Новинки</h2>
+            </div>
+            <div class="swiper-container products-newest">
+                <div class="swiper-wrapper pb24">
+                    {% for product in products_newest %}
+                        <div class="swiper-slide">
+                            {% include 'shop/catalogue/catalogue__product.html' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Best goods -->
+        <div class="home__best-goods">
+            <div class="title">
+                <h2 class="block__title h2 mb32">Самое популярное</h2>
+            </div>
+            <div class="swiper-container products-most-popular">
+                <div class="swiper-wrapper pb24">
+                    {% for product in products_popular %}
+                        <div class="swiper-slide">
+                            {% include 'shop/catalogue/catalogue__product.html' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block js %}
+<script>
+    sliderConfig = {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {el: '.swiper-pagination',},
+      scrollbar: {el: '.swiper-scrollbar',},
+    }
+
+    var home_slider_1 = new Swiper ('.home_slider_1', sliderConfig)
+    var home_slider_2 = new Swiper ('.home_slider_2', sliderConfig)
+    var home_slider_3 = new Swiper ('.home_slider_3', sliderConfig)
+
+    productsSliderConfig = {
+        navigation: {
+            nextEl: '.button-next',
+            prevEl: '.button-prev',
+        },
+        // mousewheel: {
+        //     releaseOnEdges: true,
+        // },
+        pagination: {el: '.swiper-pagination',},
+        scrollbar: {el: '.swiper-scrollbar',},
+        slidesPerView: 4, 
+        slidesPerGroup: 1,
+        breakpoints: {
+            // 560  : { slidesPerView: 1, slidesPerGroup: 2, spaceBetween: 16 },
+            640  : { slidesPerView: 2, },
+            960  : { slidesPerView: 2,  },
+            1380 : { slidesPerView: 3,  },
+            1620 : { slidesPerView: 4,  },
+        },
+    }
+    var productsMostPopular = new Swiper ('.products-most-popular', productsSliderConfig)
+    var productsNewest = new Swiper ('.products-newest', productsSliderConfig)
+
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+body {
+    overflow-x: hidden !important;
+} 
+
+main {
+    margin-top: 24px;
+    min-height: calc(100vh - 266px);
+}
+
+.content {
+    width: calc(100% - 48px * 2);
+    max-width: 1560px;
+    margin: 0 auto;
+}
+
+
+@media(max-width: 1170px) {
+    .content {
+        width: calc(100% - 24px * 2);
+    }
+}
+@media (max-width: 960px) {
+    .content {
+        width: calc(100% - 16px * 2);
+    }
+
+}
+
+.pointer {
+    cursor: pointer;
+}

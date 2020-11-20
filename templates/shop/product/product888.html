@@ -1,0 +1,67 @@
+{% load static %}
+<div class="product__action sidebar__inner">
+    <!-- In stock -->
+    <div class="in_stock">
+        <span class="round mr16"></span>
+        <span class="text upper h6">Есть в наличии</span>
+    </div>
+    <!-- Title -->
+    <p class="h3 bold product__title upper">{{ product.name }}</p>
+    <!-- COLORS -->
+    {% if product.variant.all|length > 1 %}
+    <div class="colors">
+        <p class="mb16 grey">Цвет:</p>
+        {% for product_variant in product.variant.all %}
+            <a class="{% if variant.pk == product_variant.pk %}current{% endif %}" style="background-image: url({{ product_variant.image }});" href="{{ product_variant.get_absolute_url }}"></a>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Rate -->
+    {% if product.rate_len > 0 %}
+    <div class="rating pb8">
+        <img src="{% static 'img/star.png' %}" alt="*">
+        <span class="h5">{{ product.rate }}</span>
+        <a href="#product_commnets">{{ product.rate_len }} отзывов</a>
+    </div>
+    {% endif %}
+    <p class="short_description main-text grey">
+        <span class="text-max black">{{ product.short_description }}</span>
+        <a href="#product__description" class="link">Полное описание</a>
+    </p>
+    <p class="product_price product_info__price h2 mt8 mb8">
+        <span class="current_price semibold">
+            <span class="current-price__value product__price__value" data-value="{{ product.price }}">{{ product.price }}</span>  
+            <span class="currency"> грн.</span>
+        </span>
+        {% if product.old_price > product.price %}
+        <span class="pl12 pr12"> / </span>
+        <span class="old_price semibold through">
+            <span class="old-price__value product__price__value" data-value="{{ product.old_price }}">{{ product.old_price }}</span>
+            <span class="currency"> грн.</span>
+        </span>
+        {% endif %}
+    </p>
+    
+    <div class="buy product_info__buy mt8">
+        {% include "ui/counter.html" with id="product-page__counter" price="product__price__value" %}
+        <button 
+            id="btn__add-to-cart" 
+            data-product_id="{{ product.pk }}" 
+            data-variant_id="{{ variant.pk }}" 
+            data-pixel_id="{% if variant %}{{ product.pk }}_{{ variant.pk }}{% else %}{{ product.pk }}{% endif %}"
+            class="btn__add-to-cart btn btn-buy btn-wide">КУПИТЬ
+        </button>
+    </div>
+
+    {% if product.gift %}
+    <a href="{{ product.gift.get_absolute_url }}" class="product__gift">
+        <div class="gift">
+            <img src="{{ product.gift.get_image }}" alt="">
+            <p>{{ product.gift.translate.name }}, В ПОДАРОК!</p>
+        </div>
+    </a>
+    {% endif %}
+
+   
+    
+</div>

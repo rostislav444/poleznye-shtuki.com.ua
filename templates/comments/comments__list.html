@@ -1,0 +1,66 @@
+{% load static %}
+{% load i18n %}
+<!-- COMMENTS -->
+
+{% if  product.comments.all|length %}
+{% for comment in product.comments.all %}
+    <div class="wrapper">
+        <div class="comment">
+            <meta itemprop="itemReviewed" content="{{ variant.parent.translate.name }} - {{ variant.parent.brand.name }}, {% trans 'цвет' %}: {{ variant.color.name|lower }}, {{ variant.parent.code }}">
+            <div class="rating">
+                <div class="stars pb8">
+                    <div class="stars" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                        <meta itemprop="ratingValue" content="{{ comment.stars }}">
+                        {% if    comment.stars > 4 and comment.stars <= 5 %}
+                            <img src="{% static 'img/stars-5.png' %}" alt="">
+                        {% elif  comment.stars > 3 and comment.stars <= 4 %}
+                            <img src="{% static 'img/stars-4.png' %}" alt="stars">
+                        {% elif  comment.stars > 2 and comment.stars <= 3 %}
+                            <img src="{% static 'img/stars-3.png' %}" alt="stars">
+                        {% elif  comment.stars > 1 and comment.stars <= 2 %}
+                            <img src="{% static 'img/stars-2.png' %}" alt="stars">
+                        {% elif  comment.stars > 0 and comment.stars <= 1 %}
+                            <img src="{% static 'img/stars-1.png' %}" alt="stars">
+                        {% elif  comment.stars == 0 %}
+                            <img src="{% static 'img/stars-0.png' %}" alt="stars">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="info">
+                <div class="main pb8">
+                    <p class="user upper semibold h5 mr16" itemprop="author">{{ comment.user.name }}</p>
+                    <p class="grey h6 pt2" itemprop="datePublished" content="{{ comment.created.year }}-{{ comment.created.month }}-{{ comment.created.day }}"> {{ comment.created }} </p>
+                </div>
+                {% if comment.purchase %}
+                    <p class="block pt4 h6 color-3">{% trans 'Покупка подтверждена' %}</p>
+                {% endif %}
+            </div>
+            <p class="text h5" itemprop="description">{{ comment.text }}</p>
+            {% if comment.text_plus %}
+                <p class="text h5" itemprop="description">{{ comment.text_plus }}</p>
+            {% endif %}
+            {% if comment.text_minus %}
+                <p class="text h5" itemprop="description">{{ comment.text_minus }}</p>
+            {% endif %}
+            
+            {% if comment.images.all|length %}
+                <div class="comment__images mt16">
+                    {% for image in comment.images.all %}
+                        <figure class="comment_image" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                            <a href="{{ image.image_l.url}}" itemprop="contentUrl" data-size="1200x1200">
+                                {% if image.image_xs %}
+                                    <img width="80" height="80" src="{{ image.image_xs.url}}" style="object-fit: cover; object-position: center;" itemprop="thumbnail" alt="Image description" />
+                                {% endif %}
+                            </a>                           
+                        </figure>
+                        
+                    {% endfor %}
+                </div>
+            {% endif %} 
+        </div>
+    </div>
+{% endfor %}
+{% else %}
+    <p class="h3 grey pb24">{% trans 'Пока нету комментариев' %}</p>
+{% endif %}

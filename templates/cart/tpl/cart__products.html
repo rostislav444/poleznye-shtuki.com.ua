@@ -1,0 +1,33 @@
+{% verbatim %}
+<template id="tpl_cart_list">
+    {% if products|length %}
+     
+        {% for product in products %}
+        
+        <li class="product" id="product_{{ product.id }}"
+            data-id="{{ item.variant_pk }}" data-product_price="product_price_{{ item.variant_pk }}" 
+            data-product_total="product_total_{{ item.variant_pk }}" data-quntity="{{ item.quantity }}">
+            <a class="image" href="{{ item.link }}">
+                <img class="product_image" src="{{ product.image }}" alt="img">
+            </a>
+            <div class="remove" onclick="CartDelete(this)" data-product_id="{{ product.product_id }}" data-variant_id="{{ product.variant_id }}">
+                <img class="cart_product_remove" width=8 height=8 src="/static/img/ico/close.png" alt="x">
+            </div>
+            <div class="info">
+
+                <div class="h5 pr24 upper semibold">{{ product.name|capitalize }}{% if product.color %}, цвет: {{ product.color }}{% endif %}</div>
+                <div class="counter" id="cart-product__counter">
+                    <span class="action minus">-</span>
+                    <input id="product__quantity" data-product_id="{{ product.product_id }}" data-variant_id="{{ product.variant_id }}" data-cart-update="true" type="number" value="{{ product.quantity }}" min=1 max=100>
+                    <span class="action plus">+</span>
+                </div>
+                <p class="price h5 semibold grey">{{ product.total }} грн.</p>
+            </div>
+        </li>   
+        {% endfor %}    
+    {% else %}
+        <p class="h4 grey">Корзина пуста</p>
+    {% endif %}
+    
+</template>
+{% endverbatim %}

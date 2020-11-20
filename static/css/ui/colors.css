@@ -1,0 +1,100 @@
+:root {
+    --clr-1: #ffcd00;
+    --clr-1-light: #FFF07A;
+    --clr-1-dark: #EDB908;
+    --clr-2:#f94d37;
+    --clr-2-10:#f94d3710;
+    --clr-2-20:#f94d3720;
+    --clr-2-30:#f94d3730;
+    --clr-2-40:#f94d3740;
+    --clr-2-50:#f94d3750;
+    --clr-2-light: #ff9b76;
+    --clr-2-dark: #BF3300;
+
+    --clr-3: #0050c9;
+    --clr-3-hover: #006fc9;
+    --clr-3-light: #93b3f0;
+    --clr-3-superlight: #eff4fc;
+    --clr-3-50: #afc8ee;
+    --clr-3-40: #bfd3f1;
+    --clr-3-30: #cfdef5;
+    --clr-3-20: #dfe9f8;
+    --clr-3-10: #eff4fc;
+    --clr-3-dark: #146092;
+    --clr-4: #0bbf73;
+    --clr-4-10: #0bbf7310;
+    --clr-4-20: #0bbf7320;
+    --clr-4-30: #0bbf7330;
+    --clr-4-40: #0bbf7340;
+    --clr-4-50: #0bbf7350;
+    --clr-4-light: #8aefa7;
+    --clr-4-dark: #3dc273;
+    --grey-1: #f8f9faff;
+    --grey-2: rgb(239, 242, 245);
+    --grey-3: #dee2e6ff;
+    --grey-4: #ced4daff;
+    --grey-5: #adb5bdff;
+    --grey-6: #6c757dff;
+    --grey-7: #495057ff;
+    --grey-8: #343a40ff;
+    --grey-9: #212529ff;
+}
+
+.black {
+    color: black !important;
+}
+
+.clr1 {color: var(--clr-1);}
+.clr2 {color: var(--clr-2);}
+.clr3 {color: var(--clr-3);}
+.clr4 {color: var(--clr-4);}
+.clr4-drk {color: var(--clr-4-dark);}
+
+
+
+/* Backgrounds */
+    /* Regular colors */
+    .bg-navy    { background-color: #001F3F; }
+    .bg-blue    { background-color: #0074D9; }
+    .bg-aqua    { background-color: #7FDBFF; }
+    .bg-teal    { background-color: #39CCCC; }
+    .bg-olive   { background-color: #3D9970; }
+    .bg-green   { background-color: #2ECC40; }
+    .bg-lime    { background-color: #01FF70; }
+    .bg-yellow  { background-color: #FFDC00; }
+    .bg-orange  { background-color: #FF851B; }
+    .bg-red     { background-color: #FF4136; }
+    .bg-fuchsia { background-color: #F012BE; }
+    .bg-purple  { background-color: #B10DC9; }
+    .bg-maroon  { background-color: #85144B; }
+    .bg-white   { background-color: #FFFFFF; }
+    .bg-grey    { background-color: #AAAAAA; }
+    .bg-silver  { background-color: #DDDDDD; }
+    .bg-black   { background-color: #111111; }
+    .bg-clr-1  { background-color: var(--clr-1); }
+    .bg-clr-2  { background-color: var(--clr-2); }
+    .bg-clr-3  { background-color: var(--clr-3); }
+
+
+/* Colors */
+    /* Regular colors */
+    .navy    { color: #001F3F; }
+    .blue    { color: #0074D9; }
+    .aqua    { color: #7FDBFF; }
+    .teal    { color: #39CCCC; }
+    .olive   { color: #3D9970; }
+    .green   { color: #2ECC40; }
+    .lime    { color: #01FF70; }
+    .yellow  { color: #FFDC00; }
+    .orange  { color: #FF851B; }
+    .red     { color: #FF4136; }
+    .fuchsia { color: #F012BE; }
+    .purple  { color: #B10DC9; }
+    .maroon  { color: #85144B; }
+    .white   { color: #FFFFFF; }
+    .silver  { color: #DDDDDD; }
+    .grey    { color: var(--grey-6); }
+    .light-grey    { color: #F3F3F3; }
+    .black   { color: #111111; }
+
+   

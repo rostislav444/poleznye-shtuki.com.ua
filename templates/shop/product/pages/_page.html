@@ -1,0 +1,38 @@
+{% extends '../product.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block product_data %}
+    <div class="product__addpage">
+        <div class="data">
+           {% block product__addpage %}
+           {% endblock %}
+        </div>
+        <div class="actions">
+            <div class="product_data">
+                <div class="image">
+                    <img src="{{ product.image_thmb.s.path }}" alt="">
+                </div>
+                
+                <div class="data">
+                    <p class="product_name">{{ product.name }} {% if variant %}{{ variant.color.name }}{% endif %} </p>
+                    {% include 'shop/product/components/price.html' %}
+                </div>
+            </div>
+
+            <form action="{% url 'cart:add' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.pk }}">
+                {% if variant.pk %}
+                    <input type="hidden" name="variant_id" value="{{ variant.pk }}">
+                {% endif %}
+                <button type="submit" class="order_button">
+                    <span>Купить</span>
+                </button>
+            </form>
+
+           
+        </div>
+    </div>
+{% endblock %}

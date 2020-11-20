@@ -1,0 +1,49 @@
+{% load static %}
+{% load i18n %}
+
+<div id="comment_form" style="display: none;">
+    <p class="h2 semibold center pb24">Отзыв о товаре</p>
+    <!-- FORM -->
+    <form style="max-width: 400px" class="form comment_form" id="comment_form_form" enctype="multipart/form-data" action="{% url 'comments:comments' product.pk %}" method="POST">
+        <div class="msg_block">
+            <p></p>
+        </div>
+        <!-- RATE -->
+        <div class="stars__wrapper">
+            <input type="hidden" name="stars" value="5">
+            <p class="h5 pb16">Ваша оценка</p>
+            <!-- STARS -->
+            <ul class="rate_stars" data-rate=4>
+                <li class="rate_star"></li>
+                <li class="rate_star"></li>
+                <li class="rate_star"></li>
+                <li class="rate_star"></li>
+                <li class="rate_star"></li>
+            </ul>
+        </div>
+        <p>
+            <input class="h5" name="name" id="name" type="text" placeholder="Ваше имя"  data-alert='Введите Ваше имя' required>
+        </p>
+        <!-- CONTACTS -->
+        <p>
+            <input class="h5" name="username" id="comment-form__username" type="username" placeholder="Email или телефон"  data-alert='Введите Email или номер телефона' data-error="Введеные данные имеют не верный формат">
+        </p>
+        <!-- TEXT -->
+        <p class="textare">
+            <textarea 
+            class="h5" id="review-text" name="text" id="text" 
+            data-alert='Напишите пару слов о товаре'
+            placeholder="Несколько слов о товаре..." required></textarea>
+        </p>
+        <!-- PHOTO -->
+        <p class="h5">Поделитесь ордной или несколькими фотографиями</p>
+        <p class="col-1-3">
+            <input name="image" type="file" data-alert='Добавьте хотябы одну фотографию Вашей покупки' multiple>
+        </p>
+            
+        <p class="h6 grey">{% trans 'Публичная оферта' %}</p>
+        <!-- SUBMIT -->
+        <button class="btn btn-secondary" type="submit">{% trans 'Оставить комментарий' %}</button>
+    </form>
+</div>
+

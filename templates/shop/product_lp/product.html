@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=480, user-scalable = no"> 
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>{{ product.name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800,900&display=swap" rel="stylesheet">  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui/ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/margin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/padding.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/swiper/css/swiper.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/photoswipe/photoswipe.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/photoswipe/default-skin/default-skin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/lp/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop/lp/attrs.css' %}">
+
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '989123424861604');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent', { 
+            content_type: 'product',
+            content_ids: '{{ product.pk }}',
+            content_name: '{{ product.name|capfirst }}',
+            content_category: '{{ product.category.name }}',
+            value: {{ product.price }},
+            currency: 'UAH',
+        });
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=989123424861604&ev=PageView&noscript=1"/></noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173146330-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-173146330-1');
+    </script>
+
+
+</head>
+<body>
+    <style>
+        /* .offer_section {
+            background: linear-gradient(to right,{% if product.bg1 %}{{ product.bg1 }}{% else %}#29a097{% endif %} 0,{% if product.bg2 %}{{ product.bg2 }}{% else %}#5ad7b5{% endif %} 100%);
+        } */
+    </style>
+    <main>
+        <!-- TOP OFFER -->
+        {% include 'shop/product_lp/product__offer.html' %}
+        <div class="about">
+            {% if product.description %}
+            <div class="description richtext">
+                {{ product.description|safe }}
+            </div>
+            {% endif %}
+            <!-- VIDEO -->
+            {% include 'shop/product_lp/product__video.html' %}
+        </div>
+        <!-- PRODUCT ATTRS -->
+        {% include 'shop/product_lp/product__attrs.html' %}
+        
+        <!-- GALERY -->
+        {% include 'shop/product_lp/product__galery.html' %}
+        <!-- PREFERENCES -->
+        {% if product.specifications.all %}
+        <div class="about">
+            <div class="preferences">
+                <p class="hd1">Характеристики</p>
+                <div class="list ">
+                    {% for specification in product.specifications.all %}
+                    <div class="item">
+                        <img src="{% static 'img/ico/lp/check.png' %}" alt="">
+                        <p class="attr"> {{ specification.name }}: </span><span>{{ specification.text }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- FEEDBACKS -->
+        {% include 'shop/product_lp/product__feedback.html' %}
+        <!-- HOW TO ORDER -->
+        {% include 'shop/product_lp/product__how_to_order.html' %}
+        <!-- BOTTOM OFFER -->
+        {% include 'shop/product_lp/product__offer.html' %}
+    </main>
+    <footer>
+        <div class="politics">
+            <a href="{% url 'shop:politics' %}">Политика конфидециальности</a>
+            <p>ООО "Полезные Штуки", все права защищены</p>
+        </div>
+        <div class="payment-methods">
+            <img src="{% static 'img/payment-methods.png' %}" alt="">
+        </div>
+    </footer>
+    <script src="{% static 'lib/imask/imask.js' %}"></script>
+    <script src="{% static 'lib/swiper/js/swiper.min.js' %}"></script>
+    <script>
+        var maskOptions = {mask: '+{38} (000) 000-00-00'};
+        for (let phone of document.querySelectorAll('input[name=phone]')) {
+            let mask = IMask(phone, maskOptions);
+        }
+        var extraGalery =     new Swiper('.extra_galery_slider', {
+            autoHeight: true,
+            spaceBetween: 8,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.extra_galery_next',
+                prevEl: '.extra_galery_prev',
+            },
+        });
+        var feedbacksSwiper = new Swiper('.feedbacks_swiper', {
+            autoHeight: true,
+            spaceBetween: 8,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.feedbacks_next',
+                prevEl: '.feedbacks_prev',
+            },
+        })
+
+        var section = document.querySelector('.offer_section:last-child')
+
+        for (let btn of document.querySelectorAll('.anchor_button')) {
+            btn.addEventListener('click', function () {
+               section.querySelector('form').scrollIntoView({block: "start", behavior: "smooth"});
+            })
+        }
+    </script>
+</body>
+</html>

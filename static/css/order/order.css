@@ -1,0 +1,206 @@
+:root{
+    --order-form-width: 360px;
+    --order-block-inner-padding: 24px;
+}
+.order__page {
+    position: relative;
+    display: block;
+    clear: both;
+}
+.order__page::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.order__products__wrapper {
+    position: relative;
+    display: inline-block;
+    width: calc(100% - var(--order-form-width) - 24px);
+    float: left;
+    margin-right: 24px;
+}
+.order__products {
+    width: 100%;
+}
+
+@media(max-width: 1240px) {
+    .order__products__wrapper {
+        width: 100%;
+        float: unset;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+}
+
+.order__products-list .product {
+    position: relative;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    grid-gap: 32px;
+    padding-bottom: 0;
+}
+
+.order__products-list .product .info {
+    display: grid;
+    grid-template-columns: minmax(160px, 320px) 88px minmax(96px,1fr) 24px;
+    grid-gap: 32px;
+}
+
+
+
+.order__products-list .product .info .total {
+    display: flex;
+    justify-content: center;
+}
+
+.order__products-list .product .remove {
+    position: relative;
+}
+
+.order__products-list .product .image {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    /* border: 3px solid var(--grey-5); */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.order__products-list .product .image img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.order__total-block {
+    padding: 24px 0;
+}
+
+
+@media(max-width: 720px) {
+    :root{
+        --order-block-inner-padding: 16px;
+    }
+    .order__products {
+        background-color: var(--grey-2);
+        border-radius: var(--border-radius);
+    }
+    .order__products-list .product {
+        position: relative;
+        display: block;
+        padding: 16px 16px 0 16px;
+    }
+
+    .order__products-list .product:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .order__products-list .product .image {
+        position: relative;
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        clear: right;
+        float: left;
+        padding: 0;
+        margin-right: 16px;
+    }
+
+
+    .order__products-list .product .info {
+        position: relative;
+        width: 100%;
+        margin-top: 24px;
+        display: inline-block;
+        float: left;
+    }
+    .order__products-list .product .info .title {
+        padding-right: 24px;
+        margin-bottom: 16px;
+    }
+    .order__products-list .product .info .counter {
+        float: left;
+    }
+    .order__products-list .product .info  .total {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 16px;
+        height: 34px;
+    }
+
+    .order__products-list .product .remove {
+        top: 0px;
+        right: 0px;
+        position: absolute;
+    }
+    .order__total-block {
+        padding: 16px;
+    }
+    
+    
+}
+@media(max-width: 480px) {
+    .order__products-list .product .image {
+        width: 100%;
+        height: auto;
+        padding-top: 100%;
+
+    }
+
+    .order__products-list .product .info .total {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        
+    }
+
+    .order__products-list .product .remove {
+        top: 0px;
+        right: 0px;
+        position: absolute;
+    }
+    .order__total-block {
+        padding: 16px;
+    }
+    
+    
+}
+.order__form__wrapper {
+    position: relative;
+    display: inline-block;
+    width:var(--order-form-width);
+}
+.order__form {
+    position: relative;
+    display: inline-block;
+    width: calc(100% - var(--order-block-inner-padding) * 2);
+    height: auto;
+    padding: var(--order-block-inner-padding);
+    background-color: var(--grey-2);
+    border-radius: 6px;
+}
+.order__form input {
+    background-color: white;
+    border-color: white;
+}
+
+.order__form button {
+    background: linear-gradient(rgb(255,215,11), rgb(255,170,0));
+}
+
+@media(max-width: 960px) {
+    .order__form__wrapper {
+        width: 100%;
+    }
+
+    
+}

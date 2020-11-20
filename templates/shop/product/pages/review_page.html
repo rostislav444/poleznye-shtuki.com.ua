@@ -1,0 +1,15 @@
+{% extends 'shop/product/pages/_page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links_extended %}
+    <link rel="stylesheet" href="{% static 'static/css/shop/product_comments.css' %}">
+{% endblock %}
+
+{% block product__addpage %}
+    <div class="comments__page">
+        <p class="title">Видео обзор</p>
+        {% include 'shop/product/pages/review.html' %}
+    </div>
+{% endblock %}
+
