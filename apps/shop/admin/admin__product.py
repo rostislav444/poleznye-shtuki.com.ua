@@ -141,15 +141,44 @@ class VariantInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     def product_image(self, obj=None):
-        if obj and obj.image:
-            url = obj.image.url
+        img_style = {
+            'width' : '120px',
+            'heught' : '120px',
+            'object-fit' : 'cover',
+            'object-position':'center',
+            'box-shadow': '0 4px 8px rgba(0,0,0,0.15)',
+            'margin-right': '16px',
+            'margin-bottom': '16px',
+            'border-radius' : '4px',
+        }
+        no_image = '/static/img/no_image.png'
+        img_style = ''.join([f'{style}:{style_val};' for style, style_val in img_style.items()])
+
+        if obj.pk:
+            images = []
+            
+        
+            variants = obj.variant.all()
+            if len(variants):
+                for variant in variants:
+                    variant_image = variant.images.first()
+                    if variant_image:
+                        images.append(variant_image.image_thmb['s']['path'])
+                    else:
+                        images.append(no_image)
+            else:
+                if obj.image:
+                    images.append(obj.image_thmb['s']['path'])
+                elif obj.images.images.first():
+                    images.append(obj.images.images.first().image_thmb['s']['path'])
+                else:
+                    images.append(no_image)
+
+
+            images = ''.join([f'<img style="{img_style}" src="{url}">' for url in images])
+            return mark_safe(images)
         else:
-            url='/static/img/no_image.png'
-        img = f'''<img style="
-            height:160px; width:160px; object-fit:cover; object-position:center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15); margin-right: 16px;  margin-bottom: 16px;
-            border-radius: 4px;" src="{url}">'''
-        return mark_safe(img)
+            return mark_safe(f'<img style="{img_style}" src="{no_image}">')
         
 
     def custom_label(self, obj=None):
@@ -174,14 +203,14 @@ class ProductAdmin(admin.ModelAdmin):
         # ('SEO',      {'fields' : ['seo_title', 'seo_description', 'seo_keywords']}),
         ('BG',       {'fields' : ['bg1', 'bg2', 'slogan']}),
         ('Картинка', {'fields' : [('product_image','image')]}),
-        ('Описание', {'fields' : ['category','name',('price','old_price','in_stock',),'gift','description','date',  ]}),
+        ('Описание', {'fields' : ['category','name',('price','old_price'),('suplier_price','in_stock'),'gift','description','date',  ]}),
         ('Ссылки',   {'fields' : ['suplier','suplier_id',('get_suplier_url','suplier_url',)]}),
     )
     change_form_template = 'admin/shop/change_form.html'
     ordering = ('-date',)
     readonly_fields = ['product_image','get_suplier_url']
     list_filter =  ['category','variant__color']
-    list_display = ['product_image','name','suplier_id','date','category','price']
+    list_display = ['product_image','name','price','suplier_price']
     list_editable = ['date','price']
     list_display_links = ('product_image','name')
     formfield_overrides = FORMFIELD_OVERRIDES

@@ -20,7 +20,10 @@ class GoogleTaxonomyUplaoderAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     def tree(self, obj):
-        return ' > '.join(obj.tree)
+        if obj.pk:
+            return ' > '.join(obj.tree_name)
+        return None
+        
     tree.short_description = "Название"
 
     formfield_overrides = FORMFIELD_OVERRIDES

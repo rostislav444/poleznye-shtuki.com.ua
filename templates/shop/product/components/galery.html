@@ -13,11 +13,13 @@
               </a>
             </figure>
           {% endfor %}
+          {% if product.image %}
           <figure class="product-slide swiper-slide slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
             <a href="{{ product.image_thmb.l.path }}" itemprop="contentUrl" data-size="{{ product.image_thmb.l.w }}x{{ product.image_thmb.l.h }}">
               <img class="lazy" src="{{ product.image_thmb.s.path }}" data-src="{{ product.image_thmb.l.path }}"  itemprop="thumbnail" alt="Image description" />
             </a>
           </figure>
+          {% endif %}
           {% for image in product.images.all %}
             {% if image.show %}
               <figure class="product-slide swiper-slide slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
@@ -39,9 +41,11 @@
           <div class="thumb" style="background-image: url({{ image.image_thmb.xs.path }});"></div>
         </div>
       {% endfor %}
+      {% if product.image %}
       <div>
         <div class="thumb" style="background-image: url({{ product.image_thmb.xs.path }});"></div>
       </div>
+      {% endif %}
       {% for image in product.images.all %}
         {% if image.show %}
         <div>

@@ -66,7 +66,7 @@ class ProductSerializer(serializers.ModelSerializer):
     id =       serializers.IntegerField(source="pk")
     name =     serializers.CharField(source="translate.name")
     url =      serializers.CharField(source='get_absolute_url')
-    image =    serializers.CharField(source="image_thmb.s.path")
+    image =    serializers.SerializerMethodField()
     discount = serializers.CharField(source="get_discount")
     variants = serializers.SerializerMethodField()
 
@@ -77,6 +77,19 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_variants(self, obj):
         variants = VariantSerializer(obj.variant.all(), many=True, read_only=True)
         return variants.data
+
+    def get_image(self, obj):
+        variant = obj.variant.first()
+        if variant:
+            variant_image = obj.variant.first().images.first()
+            if variant_image:
+                return variant_image.image_thmb['s']['path']
+        if obj.image:
+            return obj.image_thmb['s']['path']
+        product_image = obj.images.first()
+        if product_image:
+            return product_image.image_thmb['s']['path']
+        return '/static/img/no_image.png'
 
  
 

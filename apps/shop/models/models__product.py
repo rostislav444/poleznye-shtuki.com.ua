@@ -74,6 +74,7 @@ class Product(Translation, Image, Seo):
     slug =               models.CharField(max_length=250, blank=True,  verbose_name="Идентификатор")
     price =              models.PositiveIntegerField(default=0, blank=False, verbose_name="Цена")
     old_price =          models.PositiveIntegerField(default=0, blank=True,  verbose_name="Старая цена")
+    suplier_price =      models.PositiveIntegerField(default=0, blank=True,  verbose_name="Входная цена")
     short_description =  models.TextField(blank=True, null=True, verbose_name="Короткое описание")
     description =        RichTextField(blank=True, null=True, verbose_name="Оисание")
     date =               models.DateTimeField(default=now, verbose_name="Дата загрузки")

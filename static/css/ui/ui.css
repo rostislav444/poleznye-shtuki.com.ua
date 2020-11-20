@@ -408,6 +408,7 @@ span.message {
     line-height: 1.5;
     font-size: var(--h5);
     text-align: left;
+    list-style: none;
 }
 .richtext ul li::before {
     content: "";

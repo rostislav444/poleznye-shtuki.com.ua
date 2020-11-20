@@ -10,19 +10,19 @@ class Category(Translation, NameSlug, Image, Seo, MPTTModel):
     taxonomy =   models.ForeignKey('shop.GoogleTaxonomy', on_delete=models.CASCADE, blank=True, null=True, help_text='Категория Google')
     num =        models.PositiveIntegerField(default=0, blank=True, verbose_name='Нумерация: Каталог')
 
+    class MPTTMeta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        order_insertion_by = ['name']
+
     def save(self):
         super(Category, self).save()
 
-    class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
-
-    class MPTTMeta:
-        order_insertion_by = ['name']
-
     def __str__(self):
-    
         return ' > '.join(self.tree_name)
+
+    def get_absolute_url(self):
+        return reverse('shop:catalogue', kwargs={ 'category' : '/'.join(self.tree_slug)})
 
     @property
     def tree_slug(self):
@@ -31,10 +31,6 @@ class Category(Translation, NameSlug, Image, Seo, MPTTModel):
     @property
     def tree_name(self):
         return [category.name for category in self.get_ancestors(include_self=True)]
-         
-
-    def get_absolute_url(self):
-        return reverse('shop:catalogue', kwargs={ 'category' : '/'.join(self.tree_slug)})
 
 
 

@@ -48,9 +48,7 @@
             <img src="{{ node.image_thmb.xs.path }}" alt="">
         {% endif %}
         <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
-        {% if forloop.counter0 < category.get_ancestors|length %}
-            <span>></span>
-        {% endif %}
+        <span>></span>
     {% endfor %}
     {% if product.category.image %}
         <img src="{{ product.category.image_thmb.xs.path }}" alt="">
@@ -63,7 +61,13 @@
 <div class="product product-page">
     <div class="content">
         <a href="{% url 'shop:product' product.category_tree_slug product.slug product.pk  %}">
-            <h1 class="h1 product_name">{{ product.name }}</h1>
+            <h1 class="h1 product_name">
+                {{ product.name }}
+                {% if variant %}
+                    {% if variant.name %}&nbsp;{{ variant.name }}{% endif %}
+
+                {% endif %}
+            </h1>
         </a>
     </div>
     <div class="product-nav__wrapper">

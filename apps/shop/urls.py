@@ -18,7 +18,7 @@ pages = [
 urlpatterns = [
     path('', views.home, name='home'),
     re_path(
-        r'''^catalogue/(?P<category>[\w/]*)/'''
+        r'''^catalogue/(?P<category>[-\w/]*)/'''
         r'''product-(?P<slug>[\w-]+)-id-(?P<product_id>[0-9]+)'''
         r'''(?:-(?P<variant_id>[0-9]+))?/'''
         r'''?(?:\/(?P<page>characteristics|comments|questions|review|photo|))?/?$''',
@@ -50,7 +50,7 @@ urlpatterns = [
 
     
 
-    re_path('catalogue/(?P<category>[\w/]*)/$', views.catalogue, name="catalogue"),
+    re_path('catalogue/(?P<category>[-\w/]*)/$', views.catalogue, name="catalogue"),
     re_path('catalogue/', views.catalogue, name="catalogue"),
     path('watchlist', views.watchlist, name="watchlist"),
     path('set_watchlist/<int:product_id>/<int:variant_id>/', views.set_watchlist, name="set_watchlist"),
