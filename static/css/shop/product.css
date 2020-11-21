@@ -4,6 +4,18 @@
     clear: both;
 }
 
+@media(max-width: 960px) {
+    .product .richtext h2,
+    .product .hd1 {
+        text-align: center;
+    }
+}
+
+
+.product .richtext h1 {
+    padding-bottom: 24px;
+}
+
 .product-nav__wrapper {
     position: relative;
     width: 100%;
@@ -59,6 +71,7 @@
     display: block;
     padding-bottom: 32px;
     font-weight: 700;
+    line-height: 1.35;
 }
 .main_block_wrapper {
     position: relative;

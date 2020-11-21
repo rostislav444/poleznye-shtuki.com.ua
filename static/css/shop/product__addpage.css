@@ -98,7 +98,9 @@
         align-items: center;
     }
     .product__addpage .actions .product_data .product_name {
-        font-size: var(--h5);
+        position: relative;
+        display: none;
+        font-size: var(--h6);
     }
     .product__addpage .actions .image {
         position: relative;
@@ -116,8 +118,9 @@
         margin-right: 4px;
     }
     .product__addpage .actions .price span.current_price {
-        font-size: var(--h5);
+        font-size: var(--h4);
         font-weight: 600;
+        margin-left: 8px;
     }
     .product__addpage .actions .price span.old_price  {
         text-decoration: line-through;

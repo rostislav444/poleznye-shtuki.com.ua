@@ -34,15 +34,17 @@ urlpatterns = [
     #     name="product"
     # ),
     re_path(
-        r'''^catalogue/(?P<category>[\w/]*)/'''
+        r'''^catalogue/(?P<category>[-\w/]*)/'''
         r'''product-(?P<slug>[\w-]+)-id-(?P<product_id>[0-9]+)/'''
+        r'''(?:-(?P<variant_id>[0-9]+))?/'''
         r'''comments/form/$''',
         views.ProductPage.as_view({'get':'comment_form', 'post':'comment_form'}), 
         name="comment_form"
     ),
     re_path(
-        r'''^catalogue/(?P<category>[\w/]*)/'''
+        r'''^catalogue/(?P<category>[-\w/]*)/'''
         r'''product-(?P<slug>[\w-]+)-id-(?P<product_id>[0-9]+)/'''
+        r'''(?:-(?P<variant_id>[0-9]+))?/'''
         r'''question/form/$''',
         views.ProductPage.as_view({'get':'question_form', 'post':'question_form'}), 
         name="question_form"

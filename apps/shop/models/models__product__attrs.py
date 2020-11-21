@@ -37,6 +37,7 @@ class CoreAdvantages(Translation, Image):
 class ProductAttrGroup(Translation, Image):
     CSS = (
         ('function', 'Функции'),
+        ('function2', 'Функции2'),
         ('advantage', 'Номерованный список'),
         ('side_by_side', 'Картинки по краям'),
         ('key_value', 'Список в 2 колонки' ),

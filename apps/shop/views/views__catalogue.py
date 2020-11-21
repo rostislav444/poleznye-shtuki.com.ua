@@ -10,7 +10,7 @@ def catalogue(request, category=None):
     if category:
         category_param = category.split('/')
         category = Category.objects.get(slug=category_param[-1])
-        categories = [category] + list(category.get_children())
+        categories = category.get_descendants(include_self=True)
         products = Product.objects.filter(category__in=categories)
     else:
         products = Product.objects.all()

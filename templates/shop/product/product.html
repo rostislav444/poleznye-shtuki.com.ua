@@ -61,11 +61,11 @@
 <div class="product product-page">
     <div class="content">
         <a href="{% url 'shop:product' product.category_tree_slug product.slug product.pk  %}">
-            <h1 class="h1 product_name">
+            <h1 class="h2 product_name">
                 {{ product.name }}
                 {% if variant %}
                     {% if variant.name %}&nbsp;{{ variant.name }}{% endif %}
-
+                    {% if variant.color.name %}&nbsp;{{ variant.color.name }}{% endif %}
                 {% endif %}
             </h1>
         </a>
