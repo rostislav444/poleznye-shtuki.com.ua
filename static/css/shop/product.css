@@ -629,7 +629,7 @@
 }
 .form_screen .form_wrapper .form_block {
     background-color: rgba(255, 255, 255, 0.55);
-    background-color: var(--clr-2);
+    background-color: var(--clr-1);
     width: calc(100% - 48px);
     max-width: 420px;
     padding: 24px;
@@ -652,9 +652,47 @@
     object-fit: cover;
 }
 .form_screen .form_wrapper .form_block button {
-    background: linear-gradient(rgb(255,215,11), rgb(255,170,0));
+    background: var(--clr-2);
+    color: white;
 }
 
+.form_screen input {
+    border-width: 3px;
+}
+.form_screen input:hover,
+.form_screen input:focus {
+    border-color:var(--clr-1);
+}
+.form_screen input:focus {
+    background-color: white;
+}
+.form_screen p span.message {
+    position: absolute;
+    color: white;
+    bottom: 2px;
+
+}
+
+.form_screen .product_price {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    margin: 16px 0;
+}
+.form_screen .product_price .slash {
+    margin: 0 16px;
+}
+.form_screen .product_price * {
+    font-size: var(--h3);
+    font-weight: 700;
+}
+.form_screen .product_price .current_price {
+    color: var(--clr-2);
+}
+.form_screen .product_price .old_price {
+    text-decoration: line-through;
+    color: grey;
+}
 
 @media(max-width: 960px) {
     .form_screen {
