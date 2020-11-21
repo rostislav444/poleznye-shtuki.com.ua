@@ -8,7 +8,7 @@
     padding: 16px;
     border-radius: 6px;
     /* box-shadow: 0 3px 4px rgb(19 55 90 / 17%); */
-    background-color: var(--clr-3-20);
+    background-color: #efefef;
     font-size: var(--h5);
     font-weight: 600;
     display: flex;
