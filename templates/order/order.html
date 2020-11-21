@@ -19,18 +19,10 @@
                     {% for product in cart.products %}
                         <li class="product">
                             <a href="{{ product.link }}" class="image">
-                                <img src="{{ product.product.image }}" alt="product">
+                                <img src="{{ product.image }}" alt="product">
                             </a>
                             <div class="info">
-                                <p class="title h4 medium">
-                                    {{ product.product.name }}{% if product.variant %} - 
-                                        {% if product.variant.name %}
-                                            {{ product.variant.name }}
-                                        {% else %}
-                                            {{ product.variant.color.name }}
-                                        {% endif %}
-                                    {% endif %}
-                                </p>
+                                <p class="title h4 medium">{{ product.name }}</p>
                                 <div class="counter" id="cart-product__counter">
                                     <!-- MINUS -->
                                     <form action="{% url 'cart:update' %}" method="POST">

@@ -19,23 +19,27 @@
     float: left;
     margin-right: 24px;
 }
+
 .order__products {
-    width: 100%;
+    width: calc(100% - 32px);
+    padding: 16px;
+    background-color: var(--grey-2);
+    border-radius: 6px;
 }
 
-@media(max-width: 1240px) {
+@media(max-width: 960px) {
     .order__products__wrapper {
         width: 100%;
         float: unset;
         margin-right: 0;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 }
 
 .order__products-list .product {
     position: relative;
     display: grid;
-    grid-template-columns: 120px 1fr;
+    grid-template-columns: 80px 1fr;
     grid-gap: 32px;
     padding-bottom: 0;
 }
@@ -43,7 +47,7 @@
 .order__products-list .product .info {
     display: grid;
     grid-template-columns: minmax(160px, 320px) 88px minmax(96px,1fr) 24px;
-    grid-gap: 32px;
+    grid-gap: 16px;
 }
 
 
@@ -63,7 +67,7 @@
     width: 100%;
     height: auto;
     padding-bottom: 100%;
-    border-radius: var(--border-radius);
+    border-radius: 6px;
     overflow: hidden;
     /* border: 3px solid var(--grey-5); */
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
@@ -80,7 +84,7 @@
 }
 
 .order__total-block {
-    padding: 24px 0;
+    padding-top: 24px;
 }
 
 
@@ -90,35 +94,27 @@
     }
     .order__products {
         background-color: var(--grey-2);
-        border-radius: var(--border-radius);
+        border-radius: 6px;
     }
     .order__products-list .product {
         position: relative;
-        display: block;
+        display: grid;
         padding: 16px 16px 0 16px;
     }
 
-    .order__products-list .product:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
     .order__products-list .product .image {
         position: relative;
         display: inline-block;
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
         clear: right;
         float: left;
         padding: 0;
-        margin-right: 16px;
     }
-
-
     .order__products-list .product .info {
         position: relative;
         width: 100%;
-        margin-top: 24px;
+        /* margin-top: 24px; */
         display: inline-block;
         float: left;
     }
@@ -145,24 +141,18 @@
     .order__total-block {
         padding: 16px;
     }
-    
-    
 }
 @media(max-width: 480px) {
     .order__products-list .product .image {
         width: 100%;
         height: auto;
         padding-top: 100%;
-
     }
-
     .order__products-list .product .info .total {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        
     }
-
     .order__products-list .product .remove {
         top: 0px;
         right: 0px;
@@ -171,8 +161,6 @@
     .order__total-block {
         padding: 16px;
     }
-    
-    
 }
 .order__form__wrapper {
     position: relative;

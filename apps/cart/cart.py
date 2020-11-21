@@ -38,28 +38,38 @@ class Cart(object):
 
 
     def data(self):
-        cart_data = {
-            'products' : [], 'quantity' : 0, 'total' : 0,
-        }
-
         exclude = []
+        cart_data = {
+            'products' : [], 
+            'quantity' : 0, 
+            'total' : 0,
+        }
         for item in self.cart['products']:
             product = Product.objects.get(pk=item.get('product_id'))
-            if item.get('variant_id'):
-                variant = product.variant.filter(pk=item.get('variant_id')).first()
-            else:
-                variant = None
-            quantity = int(item['quantity'])
+            variant = product.variant.filter(pk=item.get('variant_id')).first()
+            quantity = int(item.get('quantity'))
             total = quantity * product.price
+            name = product.name
+            if variant:
+                name_parts = []
+                if variant.name:
+                    name_parts.append(variant.name)
+                if variant.color:
+                    name_parts.append(variant.color.name)
+                if len(name_parts):
+                   name += f" - {','.join(name_parts)}"
+                
             cart_data['products'].append({
-                'product' : ProductCartSerializer(product).data,
-                'variant' : variant,
+                'product' :  ProductCartSerializer(product).data,
+                'variant' :  VariantCartSerializer(variant).data,
+                'image' :    variant.image_xs if variant else product.image_xs,
+                'link' :     variant.link if variant else product.link,
+                'name' :     name,
                 'quantity' : quantity,
-                'total' : total,
+                'total' :    total,
             })   
             cart_data['quantity'] += quantity
             cart_data['total'] += total
-            
         return cart_data
 
     def save(self):

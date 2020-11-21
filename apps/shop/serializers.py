@@ -5,26 +5,23 @@ from apps.shop.models.models__product import Product, Variant
 class ProductCartSerializer(serializers.ModelSerializer):
     id =    serializers.IntegerField(source="pk")
     link =  serializers.CharField(source="get_absolute_url")
-    image =      serializers.CharField(source="image_thmb.s.path")
 
     class Meta:
         model = Product
-        fields = ['id','name','link','image']
+        fields = ['id','name','link']
 
 
 
 class VariantCartSerializer(serializers.ModelSerializer):
-    product_id = serializers.IntegerField(source="parent.pk")
-    variant_id = serializers.IntegerField(source="pk")
+    id = serializers.IntegerField(source="pk")
     color =     serializers.SerializerMethodField()
     price =      serializers.IntegerField(source="parent.price")
     old_price =  serializers.IntegerField(source="parent.old_price")
-    # link =       serializers.CharField(source="get_absolute_url")
-    image =      serializers.CharField(source="image_xs")
+   
 
     class Meta:
         model = Variant
-        fields = ['product_id', 'variant_id', 'name', 'color', 'price', 'old_price', 'image', ]
+        fields = ['id', 'name', 'color', 'price', 'old_price']
 
     def get_color(self, obj):
         if obj.color:

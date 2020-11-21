@@ -12,7 +12,11 @@
         <div class="actions">
             <div class="product_data">
                 <div class="image">
-                    <img src="{{ product.image_thmb.s.path }}" alt="">
+                    {% if variant %}
+                        <img src="{{ variant.images.all.0.image_thmb.s.path }}" alt="">
+                    {% else %}
+                        <img src="{{ product.image_thmb.s.path }}" alt="">
+                    {% endif %}
                 </div>
                 
                 <div class="data">

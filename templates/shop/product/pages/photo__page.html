@@ -10,13 +10,14 @@
     <div class="photo__page">
         <p class="title">Фото</p>
         <div class="images">
+            {% for image in variant.images.all %}
+                <img src="{{ image.image_thmb.l.path }}" alt="">
+            {% endfor %}
             <img src="{{ product.image_thmb.l.path }}" alt="">
             {% for image in product.images.all %}
                 <img src="{{ image.image_thmb.l.path }}" alt="">
             {% endfor %}
         </div>
-           
-           
     </div>
 {% endblock %}
 

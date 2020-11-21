@@ -131,9 +131,25 @@ class Product(Translation, Image, Seo):
         return self.imgs['image']['s']
        
     @property
-    def get_image_xs(self):
-        try:  return self.images.all().first().image_xs.url
-        except: return '/static/img/no_image.png'
+    def image_l(self):
+        image = self.images.first()
+        try:    
+            return image.image_thmb['l']['path']
+        except:  return '/static/img/no-photo.png'
+
+    @property
+    def image_s(self):
+        image = self.images.first()
+        try:    
+            return image.image_thmb['s']['path']
+        except: return '/static/img/no-photo.png'
+
+    @property
+    def image_xs(self):
+        image = self.images.first()
+        try:    
+            return image.image_thmb['xs']['path']
+        except: return '/static/img/no-photo.png'
 
     @property
     def get_catalogue_url(self):
@@ -143,20 +159,9 @@ class Product(Translation, Image, Seo):
            context['variant_id'] = variants[0].pk
         return reverse('shop:product', kwargs=context)
 
-
-
-
-    def get_catalogue_image(self):
-        return ''
-       
-     
-    def categories(self):
-        categoriesList = []
-        cateogry = self.category
-        while cateogry != None:
-            categoriesList.insert(0,cateogry)
-            cateogry = cateogry.parent
-        return categoriesList
+    @property
+    def link(self):
+        return self.get_absolute_url()
 
     def save(self):
         self.slug = slugify(str(unidecode.unidecode(self.name)))
@@ -165,7 +170,6 @@ class Product(Translation, Image, Seo):
         short_description = str('.'.join(soup.get_text().split('.')[:10]))
         for rplc in ['\n\n\n\n\n','\n\n\n\n','\n\n\n','\n\n','\n','... ','.. ','...','..']:
             short_description = short_description.replace('\n\n\n\n','. ')
-        
         self.short_description = short_description
         super(Product, self).save()
 
@@ -262,30 +266,31 @@ class Variant(models.Model):
     def variant_price(self):
         if self.price > 0: return self.price
         else: return self.parent.price
-
+   
     @property
-    def image(self):
+    def image_l(self):
         image = self.images.first()
-        if image: 
+        try:    
             return image.image_thmb['l']['path']
-        return '/static/img/no-photo.png'
+        except: return '/static/img/no-photo.png'
 
     @property
     def image_s(self):
         image = self.images.first()
-       
-        return '/static/img/no-photo.png'
-        
-    @property
-    def get_image(self):
-        try: self.images.first().image_s.url
-        except: '/static/img/no-photo.png'
+        try:    
+            return image.image_thmb['s']['path']
+        except: return '/static/img/no-photo.png'
 
     @property
     def image_xs(self):
         image = self.images.first()
-        if image: return image.image_thmb['xs']['path']
-        return '/static/img/no-photo.png'
+        try:    
+            return image.image_thmb['s']['path']
+        except: return '/static/img/no-photo.png'
+
+    @property
+    def link(self):
+        return self.get_absolute_url()
 
 
 class VariantImages(Image):

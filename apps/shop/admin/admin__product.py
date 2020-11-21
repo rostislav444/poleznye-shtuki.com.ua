@@ -169,8 +169,8 @@ class ProductAdmin(admin.ModelAdmin):
             else:
                 if obj.image:
                     images.append(obj.image_thmb['s']['path'])
-                elif obj.images.images.first():
-                    images.append(obj.images.images.first().image_thmb['s']['path'])
+                elif obj.images.first():
+                    images.append(obj.images.first().image_thmb['s']['path'])
                 else:
                     images.append(no_image)
 
@@ -211,7 +211,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['product_image','get_suplier_url']
     list_filter =  ['category','variant__color']
     list_display = ['product_image','name','price','suplier_price']
-    list_editable = ['date','price']
+    list_editable = ['price']
     list_display_links = ('product_image','name')
     formfield_overrides = FORMFIELD_OVERRIDES
     # change_form_template = 'admin/vendor/change_form.html'

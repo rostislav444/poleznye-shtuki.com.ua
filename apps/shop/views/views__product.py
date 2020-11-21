@@ -6,7 +6,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.template.loader import render_to_string
 from django.http import Http404, JsonResponse
 from django.urls import reverse
-from apps.shop.models import *
+from apps.shop.models import Product, Variant
 from apps.shop.serializers import ProductSerializer
 from apps.shop.functions.serialized_existed_products import serializedExistedProducts
 
@@ -98,44 +98,36 @@ class ProductPage(viewsets.ViewSet):
     context = {}
     permission_classes = [AllowAny]
 
-    def get_product(self, product, variant=None):
-        product = Product.objects.get(pk=product)
-        variant = Variant.objects.get(pk=variant) if variant else None
-        self.context = {
-            'product' : product,
-            'variant' : variant,
+    def redirect_to_product(self, product, variant=None, page=None):
+        kwargs = {
+            'slug':product.slug, 
+            'category':product.category_tree_slug, 
+            'product_id':product.pk,
         }
+        if variant: kwargs['variant_id'] = variant.pk
+        if page:    kwargs['page'] = page
+        return redirect(reverse('shop:product', kwargs=kwargs))
+
+
+    def get_product(self, product_id, variant_id=None):
+        product, variant = Product.objects.get(pk=product_id), None
+        variants = product.variant.all()
+        if len(variants):
+            if variant_id:
+                variant = variants.get(pk=variant_id)
+            else:
+                variant = variants.first()
+        self.context = {'product' : product, 'variant' : variant}
         return product, variant
 
 
     # PAGES
     def page(self, request, category, slug, product_id, variant_id=None, page=None, api=False):
         product, variant = self.get_product(product_id, variant_id)
-        # CHARACTERISTICS
-        if   page == "characteristics":
-            return render(request, 'shop/product/pages/characteristics__page.html', self.context)
-        # REVIEW
-
-        elif page == "review":
-            return render(request, 'shop/product/pages/review_page.html', self.context)
-
-        # PHOTO
-        elif page == "photo":
-            return render(request, 'shop/product/pages/photo__page.html', self.context)
-
-        # COMMENTS
-        elif page == "comments":
-            if api:
-                return Response({'html' : render_to_string('shop/product/pages/comments.html', self.context)})
-            return render(request, 'shop/product/pages/comments__page.html', self.context)
-        
-        # QUESTIONS
-        elif page == "questions":
-            if request.method == 'POST':
-                pass
-            return render(request, 'shop/product/pages/questions__page.html', self.context)
-       
-        # MAIN
+        if variant and variant_id==None:
+            return self.redirect_to_product(product, variant, page)
+        if page:
+            return render(request, f"shop/product/pages/{page}__page.html", self.context)
         else:
             if request.user.is_authenticated == False:
                 Product.objects.filter(pk=product.pk).update(view=product.view+1)
@@ -145,7 +137,6 @@ class ProductPage(viewsets.ViewSet):
     # COMMWNTS
     def comment_form(self, request, *args, **kwargs):
         if request.user.is_authenticated == False:
-           
             return redirect(reverse('user:login')+'?redirect='+request.path)
         product, variant = self.get_product(kwargs.get('product_id'), kwargs.get('variant_id'))
         if request.method == 'POST':

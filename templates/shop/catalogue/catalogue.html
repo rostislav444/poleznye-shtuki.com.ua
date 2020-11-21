@@ -29,6 +29,11 @@
                 <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
             {% endif %}
         </div>
+        <div class="subcategories">
+            {% for subcategory in category.get_children %}
+                <a href="{{ subcategory.get_absolute_url }}">{{ subcategory.name }}</a>
+            {% endfor %}
+        </div>
         <h1 class="h2 semibold mb40">{{ category.name }}</h1>
         <ul class="catalogue__list">
             {% for product in products %}
